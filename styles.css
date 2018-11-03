@@ -44,3 +44,9 @@ input {
     font-family: 'Silkscreen';
     src: url('Fonts/slkscr.ttf') format('truetype');
 }
+
+table,
+th,
+td {
+    border: 1px solid white;
+}

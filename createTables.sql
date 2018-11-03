@@ -12,8 +12,9 @@ COURSES     = 5 digits
 SECTIONS    = 4 digits
 DEPARTMENTS = 3 digits
 */ 
+USE cs332a20;
 
-DROP TABLE IF EXISTS PROFESSORS, STUDENTS, COURSES, SECTIONS, DEPARTMENTS, RECORDS, DEGREES, PREREQUISITES, MINORS;
+DROP TABLE IF EXISTS PROFESSORS, STUDENTS, COURSES, SECTIONS, DEPARTMENTS, MINORS, RECORDS, DEGREES, PREREQUISITES, MINORS;
 
 
 CREATE TABLE PROFESSORS 
@@ -96,14 +97,14 @@ CA
 
 CREATE TABLE COURSES 
   ( 
-     cNum               VARCHAR(5) NOT NULL, 
+     cNum               INT(5) NOT NULL, 
      cDepNum            INT(3) NOT NULL, 
      cTitle             VARCHAR(50) NOT NULL, 
      cTextbook          VARCHAR(50) NOT NULL, 
      cUnits             INT(1) NOT NULL, 
      cPrereqNum         INT(5) NOT NULL,
      PRIMARY KEY(cNum, cDepNum), 
-     FOREIGN KEY(cDepNum) REFERENCES DEPARTMENT(dNum)
+     FOREIGN KEY(cDepNum) REFERENCES DEPARTMENTS(dNum)
   ); 
 /*
 COURSES EXAMPLE
@@ -118,8 +119,8 @@ Calculus for Dumbies
 CREATE TABLE SECTIONS 
   ( 
      sNum           INT(4) NOT NULL, 
-     sCourseNum     VARCHAR(5) NOT NULL, 
-     sProfSSN       VARCHAR(9) NOT NULL, 
+     sCourseNum     INT(5) NOT NULL, 
+     sProfSSN       INT(9) NOT NULL, 
      sClassroom     VARCHAR(10) NOT NULL, 
      sDays          CHAR(10) NOT NULL, 
      sSeats         INT(3) NOT NULL, 
@@ -187,8 +188,7 @@ CREATE TABLE PREREQUISITES
      prereqCourseNum INT(5) NOT NULL, 
      prereqOfCourseNum INT(5) NOT NULL,
      PRIMARY KEY(prereqCourseNum), 
-     FOREIGN KEY(prereqCourseNum) REFERENCES COURSES(cNum),
-     FOREIGN KEY(prereqOfCourseNum) REFERENCES COURSES(cNum) 
+     FOREIGN KEY(prereqCourseNum) REFERENCES COURSES(cNum) 
   ); 
 /*
 PREREQUISITES EXAMPLE
