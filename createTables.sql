@@ -14,6 +14,9 @@ DEPARTMENTS = 3 digits
 */ 
 USE cs332a20;
 
+/*
+Currently does not drop all tables due to foreign key restraints
+*/
 DROP TABLE IF EXISTS PROFESSORS, STUDENTS, COURSES, SECTIONS, DEPARTMENTS, MINORS, RECORDS, DEGREES, PREREQUISITES, MINORS;
 
 
