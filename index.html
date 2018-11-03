@@ -1,17 +1,53 @@
 <html>
 
-<body>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <title>Database Project</title>
+</head>
 
-    <h1>CS332 Database Project</h1>
+<body>
 
-    <p>Group: Kyle, Stacey, John.</p>
+    <p>
+        <a href="index.html" style="color:white">HOME</a> | <a href="info.html" style="color:white">INFO</a> | <a href="http://ecs.fullerton.edu/cs332a20/studentInterface.php" style="color:white">STUDENT INTERFACE</a> | <a href="http://ecs.fullerton.edu/cs332a20/professorInterface.php" style="color:white">PROFESSOR INTERFACE</a>
+    </p>
 
-    <form action="role.php" method="post">
-        Student or Professor: <input type="text" name="userRole"><br>
+    main
 
-        <input type="submit">
-    </form>
+    <div class='table'>
+        <div class='cell'>
+            <form class='mainform' id="login" action="professorInterface.php" method="post">
+                <label>Professor SSN : </label>
+                <input type="text" name="ssn" size="18" maxlength="18" />
+                <input type="submit" name="action" value="SUBMIT" />
+                <form formaction="studentInterface.php" method="post">
+                    <br>
+                    <label>Student CWID :</label>
+                    <input formaction="studentInterface.php" method="post" type="text" name="cwid" size="18" maxlength="18" />
+                    <input type="submit" name="action" formaction="studentInterface.php" value="SUBMIT" />
+                </form>
+            </form>
+        </div>
+    </div>
+
+
+    <div class='table'>
+        <div class='cell'>
+            <form class='mainform' action="role.php" method="post">
+                Student or Professor: <input type="text" name="userRole"><br>
+                <input type="submit">
+            </form>
+            <form action="studentInterface.php" method="get">
+                <input type="submit" value="I AM A STUDENT">
+            </form>
+
+            <form action="professorInterface.php" method="get">
+                <input type="submit" value="I AM A PROFESSOR">
+            </form>
+        </div>
+    </div>
+
+
+
 </body>
 
 </html>

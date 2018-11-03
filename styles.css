@@ -1,0 +1,46 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    color: white;
+    background: black;
+    font-family: 'Silkscreen', sans-serif;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.table {
+    display: table;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    table-layout: fixed;
+    font-size: 20px;
+}
+
+.cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.mainform {
+    display: inline-block;
+    border: 8px solid yellow;
+    width: 800px;
+    padding: 150px 20;
+    background: black;
+}
+
+input {
+    margin-bottom: 15px;
+}
+
+@font-face {
+    font-family: 'Silkscreen';
+    src: url('Fonts/slkscr.ttf') format('truetype');
+}

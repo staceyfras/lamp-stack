@@ -107,8 +107,9 @@ CREATE TABLE COURSES
      cTitle             VARCHAR(50) NOT NULL, 
      cTextbook          VARCHAR(50) NOT NULL, 
      cUnits             INT(1) NOT NULL, 
+     cPrereqNum         INT(5) NOT NULL
      PRIMARY KEY(cNum, cDepNum), 
-     FOREIGN KEY(cDepNum) REFERENCES DEPARTMENT(dNum) 
+     FOREIGN KEY(cDepNum) REFERENCES DEPARTMENT(dNum)
   ); 
 /*
 COURSES EXAMPLE
@@ -182,8 +183,10 @@ A+
 CREATE TABLE PREREQUISITES 
   (   
      prereqCourseNum INT(5) NOT NULL, 
+     prereqOfCourseNum INT(5) NOT NULL,
      PRIMARY KEY(prereqCourseNum), 
-     FOREIGN KEY(prereqCourseNum) REFERENCES COURSES(cNum) 
+     FOREIGN KEY(prereqCourseNum) REFERENCES COURSES(cNum)
+     FOREIGN KEY(prereqOfCourseNum) REFERENCES COURSES(cNum) 
   ); 
 /*
 PREREQUISITES EXAMPLE

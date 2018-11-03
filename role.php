@@ -7,7 +7,7 @@
 <body>
 
     Hello,
-    <?php echo $_POST["userRole"]; ?> <br>
+    <?php echo $_POST["cwid"]; ?> <br>
 
 </body>
 
