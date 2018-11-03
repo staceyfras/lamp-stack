@@ -19,8 +19,8 @@ DROP TABLE IF EXISTS PROFESSORS, STUDENTS, COURSES, SECTIONS, DEPARTMENTS, RECOR
 CREATE TABLE PROFESSORS 
   ( 
      pSSN        INT(9) NOT NULL, 
-     pFName VARCHAR(50) NOT NULL, 
-     pLName  VARCHAR(50) NOT NULL, 
+     pFName      VARCHAR(50) NOT NULL, 
+     pLName      VARCHAR(50) NOT NULL, 
      pStreet     VARCHAR(50) NOT NULL, 
      pCity       VARCHAR(50) NOT NULL, 
      pState      CHAR(2) NOT NULL, 
@@ -44,6 +44,27 @@ M
 (800)5551111
 Dr
 */
+
+CREATE TABLE DEPARTMENTS 
+  ( 
+     dNum          INT(3) NOT NULL, 
+     dName         VARCHAR(20) NOT NULL, 
+     dPhone        INT(10) NOT NULL, 
+     dOffice       VARCHAR(10) NOT NULL, 
+     dChairmanSSN  INT(9) NOT NULL, 
+     PRIMARY KEY(dNum, dChairmanSSN), 
+     FOREIGN KEY(dChairmanSSN) REFERENCES PROFESSORS(pSSN) 
+  ); 
+/*
+DEPARTMENTS EXAMPLE
+____________________
+1234
+Mathematics
+(800)5551111
+MH400
+123456789
+*/  
+
 
 CREATE TABLE STUDENTS
   ( 
@@ -73,16 +94,37 @@ CA
 92831
 */
 
+CREATE TABLE COURSES 
+  ( 
+     cNum               VARCHAR(5) NOT NULL, 
+     cDepNum            INT(3) NOT NULL, 
+     cTitle             VARCHAR(50) NOT NULL, 
+     cTextbook          VARCHAR(50) NOT NULL, 
+     cUnits             INT(1) NOT NULL, 
+     cPrereqNum         INT(5) NOT NULL,
+     PRIMARY KEY(cNum, cDepNum), 
+     FOREIGN KEY(cDepNum) REFERENCES DEPARTMENT(dNum)
+  ); 
+/*
+COURSES EXAMPLE
+____________________
+11111
+1234
+Mathematics
+Calculus for Dumbies
+3
+*/    
+
 CREATE TABLE SECTIONS 
   ( 
-     sNum         INT(4) NOT NULL, 
-     sCourseNum  VARCHAR(5) NOT NULL, 
-     sProfSSN  VARCHAR(9) NOT NULL, 
-     sClassroom      VARCHAR(10) NOT NULL, 
-     sDays           CHAR(10) NOT NULL, 
-     sSeats          INT(3) NOT NULL, 
-     sBeginTime VARCHAR(10) NOT NULL, 
-     sEndTime    VARCHAR(10) NOT NULL, 
+     sNum           INT(4) NOT NULL, 
+     sCourseNum     VARCHAR(5) NOT NULL, 
+     sProfSSN       VARCHAR(9) NOT NULL, 
+     sClassroom     VARCHAR(10) NOT NULL, 
+     sDays          CHAR(10) NOT NULL, 
+     sSeats         INT(3) NOT NULL, 
+     sBeginTime     VARCHAR(10) NOT NULL, 
+     sEndTime       VARCHAR(10) NOT NULL, 
      PRIMARY KEY(sNum, sCourseNum), 
      FOREIGN KEY(sCourseNum) REFERENCES COURSES(cNum), 
      FOREIGN KEY(sProfSSN) REFERENCES PROFESSORS(pSSN) 
@@ -100,26 +142,7 @@ MWF
 5:30
 */    
 
-CREATE TABLE COURSES 
-  ( 
-     cNum            VARCHAR(5) NOT NULL, 
-     cDepNum INT(3) NOT NULL, 
-     cTitle             VARCHAR(50) NOT NULL, 
-     cTextbook          VARCHAR(50) NOT NULL, 
-     cUnits             INT(1) NOT NULL, 
-     cPrereqNum         INT(5) NOT NULL
-     PRIMARY KEY(cNum, cDepNum), 
-     FOREIGN KEY(cDepNum) REFERENCES DEPARTMENT(dNum)
-  ); 
-/*
-COURSES EXAMPLE
-____________________
-11111
-1234
-Mathematics
-Calculus for Dumbies
-3
-*/    
+
 
 CREATE TABLE DEGREES 
   ( 
@@ -135,35 +158,14 @@ Mathematics
 123456789
 */
 
-CREATE TABLE DEPARTMENTS 
-  ( 
-     dNum       INT(3) NOT NULL, 
-     dName         VARCHAR(20) NOT NULL, 
-     dPhone        INT(10) NOT NULL, 
-     dOffice       VARCHAR(10) NOT NULL, 
-     dChairmanSSN INT(9) NOT NULL, 
-     PRIMARY KEY(dNum, dChairmanSSN), 
-     FOREIGN KEY(dChairmanSSN) REFERENCES PROFESSORS(pSSN) 
-  ); 
-/*
-DEPARTMENTS EXAMPLE
-____________________
-1234
-Mathematics
-(800)5551111
-MH400
-123456789
-*/  
-
-
 
 
 CREATE TABLE RECORDS
   ( 
      rCWID           INT(8) NOT NULL, 
      rGrade          VARCHAR(10) NOT NULL, 
-     rSecNum INT(4) NOT NULL, 
-     rCourseNum  INT(5) NOT NULL, 
+     rSecNum         INT(4) NOT NULL, 
+     rCourseNum      INT(5) NOT NULL, 
      PRIMARY KEY(rSecNum, rCWID, rCourseNum), 
      FOREIGN KEY(rSecNum) REFERENCES SECTIONS(sNum), 
      FOREIGN KEY(rCWID) REFERENCES STUDENTS(sCWID), 
@@ -185,7 +187,7 @@ CREATE TABLE PREREQUISITES
      prereqCourseNum INT(5) NOT NULL, 
      prereqOfCourseNum INT(5) NOT NULL,
      PRIMARY KEY(prereqCourseNum), 
-     FOREIGN KEY(prereqCourseNum) REFERENCES COURSES(cNum)
+     FOREIGN KEY(prereqCourseNum) REFERENCES COURSES(cNum),
      FOREIGN KEY(prereqOfCourseNum) REFERENCES COURSES(cNum) 
   ); 
 /*
@@ -203,11 +205,5 @@ CREATE TABLE MINORS
      PRIMARY KEY(mDepNum, mStudentCWID), 
      FOREIGN KEY(mStudentCWID) REFERENCES STUDENTS(sCWID), 
      FOREIGN KEY(mDepNum) REFERENCES DEPARTMENTS(dNum) 
-  ); 
-/*
-MINORS EXAMPLE
-____________________
-12345
-88888888
-*/      
+  );    
 
