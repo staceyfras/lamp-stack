@@ -12,7 +12,12 @@
     <p>
         <a href="index.html" style="color:white">HOME</a> | <a href="info.html" style="color:white">INFO</a> | <a href="http://ecs.fullerton.edu/cs332a20/studentInterface.php" style="color:white">STUDENT INTERFACE</a> | <a href="http://ecs.fullerton.edu/cs332a20/professorInterface.php" style="color:white">PROFESSOR INTERFACE</a>
     </p>
-
+    <!-- Going to add in buttons that change query or append to it -->
+    <form action="studentInterface.php" method="post">
+        Extra Query: <input type="text" name="extraQuery">
+        <input type="submit" value="SUBMIT">
+    </form>
+    <br>
     <form action="studentInterface.php" method="post">
         Student CWID: <input type="text" name="cwid">
         <input type="submit" value="SUBMIT">
@@ -64,8 +69,8 @@
             }//END FUNCTION
             
             //QUERY
-            $sqlresult = $conn->query( "SELECT * FROM PROFESSORS;" ) ; 
-    
+            $sqlresult = $conn->query( "SELECT * FROM PROFESSORS " ) ; 
+            $sqlresult .= $_POST["extraQuery"]
             //close mysqli connection
             mysqli_close();
     
