@@ -14,7 +14,14 @@
     </p>
     <!-- Going to add in buttons that change query or append to it -->
     <form action="studentInterface.php" method="post">
-        Extra Query: <input type="text" name="extraQuery">
+        SSN: <input type="text" name="SSNQuery">
+        <input type="submit" value="SUBMIT">
+    </form>
+    <br>
+
+    <!-- Good example of form that is based on a query -->
+    <form action="studentInterface.php" method="post">
+        First Name: <input type="text" name="pFName">
         <input type="submit" value="SUBMIT">
     </form>
     <br>
@@ -68,10 +75,18 @@
               return( $htmltable ) ; 
             }//END FUNCTION
             
-            //QUERY
-            $sqlresult = $conn->query( "SELECT * FROM PROFESSORS " ) ; 
-            $sqlresult .= $_POST["extraQuery"]
-            //close mysqli connection
+            if( isset($_POST['SSNQuery']) ) {
+                $stringOfQuery="SELECT * FROM PROFESSORS ";
+                $stringOfQuery .= "where pSSN = '".$_POST['SSNQuery']."'";
+            } 
+            //These if statements are needed to determine which form was filled
+            if( isset($_POST['pFName']) ) {
+                $stringOfQuery="SELECT * FROM PROFESSORS ";
+                $stringOfQuery .= "where pFName = '".$_POST['pFName']."'";
+            } 
+            //retrieve results with current Query
+            $sqlresult = $conn->query( $stringOfQuery ) ; 
+            
             mysqli_close();
     
             //connect and enter mainform div ie yellow console 
