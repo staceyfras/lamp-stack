@@ -27,7 +27,7 @@
     Below php connects to sql db, contains a function that converts sql query to html tables, our current query, closes db, and and finishes our mainform table. 
     -->
     <?php
-            $servername = "ecsmysql";
+            $servername = "ecsmysql"; 
             $username = "cs332a20"; 
             $password = "hievoosi"; //change to server pass
 
