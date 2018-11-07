@@ -6,7 +6,7 @@ ________________________________
 Inserts data to database
 
 Reqs:
-30 enrollment records
+20 enrollment records
 4 courses
 6 sections
 */ 
