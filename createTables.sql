@@ -78,11 +78,7 @@ CREATE TABLE COURSES
         ON DELETE CASCADE ON UPDATE NO ACTION,
      cTitle             VARCHAR(50) NOT NULL, 
      cTextbook          VARCHAR(50), 
-     cUnits             INT(1) NOT NULL, 
-     cPrereqNum         INT(5),
-     CONSTRAINT `fk_course_prereqnum`
-        FOREIGN KEY(cPrereqNum) REFERENCES COURSES(cNum)
-        ON DELETE SET NULL ON UPDATE NO ACTION
+     cUnits             INT(1) NOT NULL
   ); 
 /*
 COURSES EXAMPLE
@@ -94,33 +90,66 @@ Calculus for Dumbies
 3
 */  
 
--- CREATE TABLE STUDENTS
---   ( 
---      sCWID              INT(8) NOT NULL, 
---      studentDepNum INT(3) NOT NULL, 
---      sFName        VARCHAR(20) NOT NULL, 
---      sLName         VARCHAR(20) NOT NULL, 
---      sPhone             VARCHAR(20) NOT NULL, 
---      sStreet            VARCHAR(50) NOT NULL, 
---      sCity              VARCHAR(50) NOT NULL,
---      sState             CHAR(2) NOT NULL, 
---      sZip               INT(6) NOT NULL,
---      PRIMARY KEY(sCWID, studentDepNum), 
---      FOREIGN KEY(studentDepNum) REFERENCES DEPARTMENTS(dNum) 
---   ); 
--- /*
--- STUDENTS EXAMPLE
--- ____________________
--- 88888888
--- 11111
--- Kyle
--- Guss
--- (800)1110011
--- 2000 College Place
--- Fullerton
--- CA
--- 92831
--- */  
+CREATE TABLE STUDENTS
+  ( 
+     sCWID              INT(8) PRIMARY KEY, 
+     sFName             VARCHAR(20) NOT NULL, 
+     sLName              VARCHAR(20) NOT NULL, 
+     sPhone             VARCHAR(20) NOT NULL, 
+     sStreet            VARCHAR(50) NOT NULL, 
+     sCity              VARCHAR(50) NOT NULL,
+     sState             CHAR(2) NOT NULL, 
+     sZip               INT(6) NOT NULL
+  ); 
+/*
+STUDENTS EXAMPLE
+____________________
+88888888
+11111
+Kyle
+Guss
+(800)1110011
+2000 College Place
+Fullerton
+CA
+92831
+*/  
+
+CREATE TABLE DEGREES 
+  ( 
+     degreeName           VARCHAR(50) NOT NULL, 
+     degreeProfSSN        INT(9),
+     CONSTRAINT `fk_professor_degree`
+        FOREIGN KEY(degreeProfSSN) REFERENCES PROFESSORS(pSSN) 
+        ON DELETE SET NULL ON UPDATE NO ACTION
+     
+  ); 
+
+
+CREATE TABLE PREREQUISITES 
+  (   
+     prqNum INT(5),
+     CONSTRAINT `fk_course_prereqNum`
+        FOREIGN KEY (prqNum) REFERENCES COURSES(cNum)
+        ON DELETE CASCADE ON UPDATE NO ACTION,
+     prqOfNum INT(5), 
+     CONSTRAINT `fk_course_prereqOfNum`
+        FOREIGN KEY (prqOfNum) REFERENCES COURSES(cNum)
+        ON DELETE CASCADE ON UPDATE NO ACTION
+      
+  ); 
+/*
+PREREQUISITES EXAMPLE
+____________________
+12345
+*/  
+
+/*
+DEGREES EXAMPLE
+____________________
+Mathematics
+123456789
+*/
 
 -- CREATE TABLE SECTIONS 
 --   ( 
@@ -151,21 +180,6 @@ Calculus for Dumbies
 
 
 
--- CREATE TABLE DEGREES 
---   ( 
---      degreeName           VARCHAR(50) NOT NULL, 
---      degreeProfSSN INT(9) NOT NULL, 
---      PRIMARY KEY(degreeName, degreeProfSSN), 
---      FOREIGN KEY(degreeProfSSN) REFERENCES PROFESSORS(pSSN) 
---   ); 
--- /*
--- DEGREES EXAMPLE
--- ____________________
--- Mathematics
--- 123456789
--- */
-
-
 
 -- CREATE TABLE RECORDS
 --   ( 
@@ -186,21 +200,7 @@ A+
 1234
 12345
 */      
-
-
-
--- CREATE TABLE PREREQUISITES 
---   (   
---      prereqCourseNum INT(5) NOT NULL, 
---      prereqOfCourseNum INT(5) NOT NULL,
---      PRIMARY KEY(prereqCourseNum), 
---      FOREIGN KEY(prereqCourseNum) REFERENCES COURSES(cNum) 
---   ); 
-/*
-PREREQUISITES EXAMPLE
-____________________
-12345
-*/    
+  
 
 
 
