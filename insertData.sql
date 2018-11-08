@@ -17,8 +17,8 @@ VALUES		(666666666, "Clippers", "Thunder", "15 Stage College Lane", "Fullerton",
 INSERT INTO DEPARTMENTS(dNum, dName, dPhone, dOffice, dChairperson)
 VALUES		(111, "Computer Science", "7145650101", "CS400", 666666666);
 
--- INSERT INTO COURSES(cNum, dNum, cTitle, cTextbook, cUnits, cPrereqNum)
--- VALUES	(12345, 123, "Calculus II", "Calculus II, For Dumbies", 3, NULL);
+INSERT INTO COURSES(cNum, cDeptNum, cTitle, cTextbook, cUnits, cPrereqNum)
+VALUES	(12345, 111, "Calculus II", "Calculus II, For Dumbies", 3, NULL);
 
 
 -- INSERT INTO DEGREES(degreeProfSSN, degreeName)

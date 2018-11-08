@@ -50,15 +50,14 @@ Dr
 
 CREATE TABLE DEPARTMENTS 
   ( 
-     dNum          INT(3) NOT NULL UNIQUE PRIMARY KEY, 
+     dNum          INT(3) PRIMARY KEY, 
      dName         VARCHAR(20) NOT NULL, 
      dPhone        VARCHAR(25) NOT NULL, 
      dOffice       VARCHAR(10) NOT NULL,
      dChairperson  INT(9), 
      CONSTRAINT `fk_chairperson`
         FOREIGN KEY (dChairperson) REFERENCES PROFESSORS(pSSN)
-        ON DELETE CASCADE
-        ON UPDATE NO ACTION
+        ON DELETE CASCADE ON UPDATE NO ACTION
   ); 
 /*
 DEPARTMENTS EXAMPLE
@@ -70,18 +69,21 @@ MH400
 123456789
 */  
 
--- CREATE TABLE COURSES 
---   ( 
---      cNum               INT(5) NOT NULL, 
---      cDeptNum           INT(3) NOT NULL, 
---      cTitle             VARCHAR(50) NOT NULL, 
---      cTextbook          VARCHAR(50), 
---      cUnits             INT(1) NOT NULL, 
---      cPrereqNum         INT(5),
---      PRIMARY KEY(cNum), 
---      FOREIGN KEY(cDeptNum) REFERENCES DEPARTMENTS(dNum)
---      FOREIGN KEY(cPrereqNum) REFERENCES COURSES(cNum)
---   ); 
+CREATE TABLE COURSES 
+  ( 
+     cNum               INT(5) PRIMARY KEY, 
+     cDeptNum           INT(3) NOT NULL,
+     CONSTRAINT `fk_course_deptnum`
+        FOREIGN KEY (cDeptNum) REFERENCES DEPARTMENTS(dNum)
+        ON DELETE CASCADE ON UPDATE NO ACTION,
+     cTitle             VARCHAR(50) NOT NULL, 
+     cTextbook          VARCHAR(50), 
+     cUnits             INT(1) NOT NULL, 
+     cPrereqNum         INT(5),
+     CONSTRAINT `fk_course_prereqnum`
+        FOREIGN KEY(cPrereqNum) REFERENCES COURSES(cNum)
+        ON DELETE SET NULL ON UPDATE NO ACTION
+  ); 
 /*
 COURSES EXAMPLE
 ____________________
