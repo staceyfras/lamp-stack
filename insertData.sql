@@ -17,20 +17,20 @@ VALUES		(666666666, "Clippers", "Thunder", "15 Stage College Lane", "Fullerton",
 INSERT INTO DEGREES(degreeProfSSN, degreeName)
 VALUES		(666666666, "Mathematics");
 
-INSERT INTO COURSES(cDepNum, cNum, cTitle, cTextbook, cUnits)
-VALUES		(123, 12345, "Calculus II", "Calculus II, For Dumbies", 3);
+INSERT INTO COURSES(cNum, cDepNum, cTitle, cTextbook, cUnits)
+VALUES		(12345, 123, "Calculus II", "Calculus II, For Dumbies", 3);
 
-INSERT INTO SECTIONS(sNum, sCourseNum, sProfSSN, sClassroom, sDays, sSeats, sBeginTime, sEndTime)
-VALUES		(1234, 12345, 123456789, "MH401", "MWF", 30, '4:30', '5:30');
+-- INSERT INTO SECTIONS(sNum, sCourseNum, sProfSSN, sClassroom, sDays, sSeats, sBeginTime, sEndTime)
+-- VALUES		(1234, 12345, 123456789, "MH401", "MWF", 30, '4:30', '5:30');
 
-INSERT INTO PREREQUISITES(prereqCourseNum, prereqOfCourseNum)
-VALUES		("12344", "12345");
+-- INSERT INTO PREREQUISITES(prereqCourseNum, prereqOfCourseNum)
+-- VALUES		("12344", "12345");
 
-INSERT INTO STUDENTS(sCWID, sDepNum, sFName, sLName, sPhone, sStreet, sCity, sState, sZip)
-VALUES		(12345678, 12345, "Kyle", "Guss", "(949)9992222", "1000 Pictor Ct", "Trabuco Canyon", "CA", 92679);
+-- INSERT INTO STUDENTS(sCWID, sDepNum, sFName, sLName, sPhone, sStreet, sCity, sState, sZip)
+-- VALUES		(12345678, 12345, "Kyle", "Guss", "(949)9992222", "1000 Pictor Ct", "Trabuco Canyon", "CA", 92679);
 
-INSERT INTO MINORS(mDepNum, mStudentCWID)
-VALUES		(65423, 12345678);
+-- INSERT INTO MINORS(mDepNum, mStudentCWID)
+-- VALUES		(65423, 12345678);
 
-INSERT INTO RECORDS(rCWID, rSecNum, rCourseNum, rGrade)
-VALUES      (12345678, 1234, 33212, 'B');
+-- INSERT INTO RECORDS(rCWID, rSecNum, rCourseNum, rGrade)
+-- VALUES      (12345678, 1234, 33212, 'B');

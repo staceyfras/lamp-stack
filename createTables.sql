@@ -12,7 +12,7 @@ COURSES     = 5 digits
 SECTIONS    = 4 digits
 DEPARTMENTS = 3 digits
 */ 
-USE cs332a20;
+USE cs332a18;
 
 /*
 Currently does not drop all tables due to foreign key restraints
@@ -105,7 +105,7 @@ CREATE TABLE COURSES
      cTitle             VARCHAR(50) NOT NULL, 
      cTextbook          VARCHAR(50) NOT NULL, 
      cUnits             INT(1) NOT NULL, 
-     cPrereqNum         INT(5) NOT NULL,
+     cPrereqNum         INT(5),
      PRIMARY KEY(cNum, cDepNum), 
      FOREIGN KEY(cDepNum) REFERENCES DEPARTMENTS(dNum)
   ); 
@@ -201,6 +201,7 @@ ____________________
 
 
 
+-- i don't think we need this?
 CREATE TABLE MINORS 
   ( 
      mDepNum INT(3) NOT NULL, 
