@@ -12,13 +12,17 @@ Reqs:
 */ 
 
 INSERT INTO PROFESSORS(pSSN, pFName, pLName, pStreet, pCity, pState, pZip, pSex, pPhone, pTitle)
-VALUES		(666666666, "Clippers", "Thunder", "15 Stage College Lane", "Fullerton", "CA", 92831, "M", "(800)5555555", "Dr");
+VALUES		(666666666, "Clippers", "Thunder", "15 Stage College Lane", "Fullerton", "CA", 92831, "M", "8005555555", "Dr");
 
-INSERT INTO DEGREES(degreeProfSSN, degreeName)
-VALUES		(666666666, "Mathematics");
+INSERT INTO DEPARTMENTS(dNum, dName, dPhone, dOffice, dChairperson)
+VALUES		(111, "Computer Science", "7145650101", "CS400", 666666666);
 
-INSERT INTO COURSES(cNum, cDepNum, cTitle, cTextbook, cUnits)
-VALUES		(12345, 123, "Calculus II", "Calculus II, For Dumbies", 3);
+-- INSERT INTO COURSES(cNum, dNum, cTitle, cTextbook, cUnits, cPrereqNum)
+-- VALUES	(12345, 123, "Calculus II", "Calculus II, For Dumbies", 3, NULL);
+
+
+-- INSERT INTO DEGREES(degreeProfSSN, degreeName)
+-- VALUES		(666666666, "Mathematics");
 
 -- INSERT INTO SECTIONS(sNum, sCourseNum, sProfSSN, sClassroom, sDays, sSeats, sBeginTime, sEndTime)
 -- VALUES		(1234, 12345, 123456789, "MH401", "MWF", 30, '4:30', '5:30');
