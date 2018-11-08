@@ -32,6 +32,12 @@ VALUES		("Mathematics", 666666666);
 INSERT INTO PREREQUISITES(prqNum, prqOfNum)
 VALUES		("12344", "12345");
 
+INSERT INTO MINORS_IN(minDepNum, minCWID)
+VALUES		(111, 12345678);
+
+INSERT INTO MAJORS_IN(majDepNum, majCWID)
+VALUES		(111, 12345678);
+
 -- INSERT INTO SECTIONS(sNum, sCourseNum, sProfSSN, sClassroom, sDays, sSeats, sBeginTime, sEndTime)
 -- VALUES		(1234, 12345, 123456789, "MH401", "MWF", 30, '4:30', '5:30');
 
@@ -39,8 +45,7 @@ VALUES		("12344", "12345");
 
 
 
--- INSERT INTO MINORS(mDepNum, mStudentCWID)
--- VALUES		(65423, 12345678);
+
 
 -- INSERT INTO RECORDS(rCWID, rSecNum, rCourseNum, rGrade)
 -- VALUES      (12345678, 1234, 33212, 'B');

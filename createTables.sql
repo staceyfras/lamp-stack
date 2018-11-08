@@ -94,7 +94,7 @@ CREATE TABLE STUDENTS
   ( 
      sCWID              INT(8) PRIMARY KEY, 
      sFName             VARCHAR(20) NOT NULL, 
-     sLName              VARCHAR(20) NOT NULL, 
+     sLName             VARCHAR(20) NOT NULL, 
      sPhone             VARCHAR(20) NOT NULL, 
      sStreet            VARCHAR(50) NOT NULL, 
      sCity              VARCHAR(50) NOT NULL,
@@ -124,6 +124,12 @@ CREATE TABLE DEGREES
         ON DELETE SET NULL ON UPDATE NO ACTION
      
   ); 
+/*
+DEGREES EXAMPLE
+____________________
+Mathematics
+123456789
+*/
 
 
 CREATE TABLE PREREQUISITES 
@@ -144,12 +150,33 @@ ____________________
 12345
 */  
 
-/*
-DEGREES EXAMPLE
-____________________
-Mathematics
-123456789
-*/
+/* CONSIDER: include check that major != minor (make two tables into one)
+? Or provide a check during user input process... */
+CREATE TABLE MINORS_IN 
+  ( 
+     minDepNum        INT(3) NOT NULL,
+     CONSTRAINT `fk_minor_depnum`
+        FOREIGN KEY(minDepNum) REFERENCES DEPARTMENTS(dNum) 
+        ON DELETE CASCADE ON UPDATE NO ACTION,
+     minCWID          INT(8) NOT NULL, 
+     CONSTRAINT `fk_minor_studentcwid`
+        FOREIGN KEY(minCWID) REFERENCES STUDENTS(sCWID)
+        ON DELETE CASCADE ON UPDATE NO ACTION
+     
+  ); 
+
+CREATE TABLE MAJORS_IN 
+  ( 
+     majDepNum        INT(3) NOT NULL,
+     CONSTRAINT `fk_major_depnum`
+        FOREIGN KEY(majDepNum) REFERENCES DEPARTMENTS(dNum) 
+        ON DELETE CASCADE ON UPDATE NO ACTION,
+     majCWID          INT(8) NOT NULL, 
+     CONSTRAINT `fk_major_studentcwid`
+        FOREIGN KEY(majCWID) REFERENCES STUDENTS(sCWID)
+        ON DELETE CASCADE ON UPDATE NO ACTION
+     
+  );   
 
 -- CREATE TABLE SECTIONS 
 --   ( 
@@ -204,13 +231,5 @@ A+
 
 
 
--- i don't think we need this?
--- CREATE TABLE MINORS 
---   ( 
---      mDepNum INT(3) NOT NULL, 
---      mStudentCWID      INT(8) NOT NULL, 
---      PRIMARY KEY(mDepNum, mStudentCWID), 
---      FOREIGN KEY(mStudentCWID) REFERENCES STUDENTS(sCWID), 
---      FOREIGN KEY(mDepNum) REFERENCES DEPARTMENTS(dNum) 
---   );    
+ 
 
