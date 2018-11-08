@@ -6,7 +6,7 @@ ________________________________
 Inserts data to database
 
 Reqs:
-30 enrollment records
+20 enrollment records
 4 courses
 6 sections
 */ 
@@ -40,6 +40,7 @@ VALUES		(111, 12345678);
 
 -- INSERT INTO SECTIONS(sNum, sCourseNum, sProfSSN, sClassroom, sDays, sSeats, sBeginTime, sEndTime)
 -- VALUES		(1234, 12345, 123456789, "MH401", "MWF", 30, '4:30', '5:30');
+
 
 
 
