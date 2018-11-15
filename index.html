@@ -1,52 +1,28 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="styles.css">
     <title>Database Project</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">  
 </head>
 
 <body>
 
     <p>
-        <a href="index.html" style="color:white">HOME</a> | <a href="info.html" style="color:white">INFO</a> | <a href="http://ecs.fullerton.edu/cs332a20/studentInterface.php" style="color:white">STUDENT INTERFACE</a> | <a href="http://ecs.fullerton.edu/cs332a20/professorInterface.php" style="color:white">PROFESSOR INTERFACE</a>
+        <a href="index.html" style="color:white">HOME</a> | <a href="info.html" style="color:white">INFO</a>
     </p>
 
-    main
-
     <div class='table'>
         <div class='cell'>
-            <form class='mainform' id="login" action="professorInterface.php" method="post">
-                <label>Professor SSN : </label>
-                <input type="text" name="ssn" size="18" maxlength="18" />
-                <input type="submit" name="action" value="SUBMIT" />
-                <form formaction="studentInterface.php" method="post">
+            WELCOME TO THE PORTAL!<br><br>
+            <form class='mainform' method="post">
+                <label>Are you a professor?</label><br>
+                <input type="submit" name="action" formaction="professorInterface.php" value="I AM A PROFESSOR" />
                     <br>
-                    <label>Student CWID :</label>
-                    <input formaction="studentInterface.php" method="post" type="text" name="cwid" size="18" maxlength="18" />
-                    <input type="submit" name="action" formaction="studentInterface.php" value="SUBMIT" />
-                </form>
+                    <label>Are you a student?</label><br>
+                    <input type="submit" name="action" formaction="studentInterface.php" value="I AM A STUDENT" />
             </form>
         </div>
     </div>
-
-
-    <div class='table'>
-        <div class='cell'>
-            <form class='mainform' action="role.php" method="post">
-                Student or Professor: <input type="text" name="userRole"><br>
-                <input type="submit">
-            </form>
-            <form action="studentInterface.php" method="get">
-                <input type="submit" value="I AM A STUDENT">
-            </form>
-
-            <form action="professorInterface.php" method="get">
-                <input type="submit" value="I AM A PROFESSOR">
-            </form>
-        </div>
-    </div>
-
-
 
 </body>
 

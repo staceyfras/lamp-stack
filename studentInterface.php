@@ -1,17 +1,14 @@
 <html>
-
 <head>
     <title>Student Portal</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
 <body>
-    <!------
-    NAVBAR, Interface links currently broken. May need to change these to clickable forms from href links to POST to php.
-    -->
     <p>
-        <a href="index.html" style="color:white">HOME</a> | <a href="info.html" style="color:white">INFO</a> | <a href="http://ecs.fullerton.edu/cs332a20/studentInterface.php" style="color:white">STUDENT INTERFACE</a> | <a href="http://ecs.fullerton.edu/cs332a20/professorInterface.php" style="color:white">PROFESSOR INTERFACE</a>
+        <a href="index.html" style="color:white">RETURN HOME</a> | <a href="info.html" style="color:white">INFO</a> 
     </p>
+    <h2>Student Portal</h2><br>
     <!-- Going to add in buttons that change query or append to it -->
     <form action="studentInterface.php" method="post">
         SSN: <input type="text" name="SSNQuery">
@@ -30,20 +27,22 @@
         <input type="submit" value="SUBMIT">
     </form>
 
+
     <!-------
     Below php connects to sql db, contains a function that converts sql query to html tables, our current query, closes db, and and finishes our mainform table. 
     -->
     <?php
-            $servername = "ecsmysql"; 
-            $username = "cs332a20"; 
-            $password = "hievoosi"; //change to server pass
 
             // Create connection
-            $conn = new mysqli($servername, $username, $password, "cs332a20");
+            $conn = new mysqli("localhost", "cs332a1");
+            //Check connection. Quit if failed.
+            if ($conn->connect_errno) { 
+              echo "failed to connect to MySql: (" . $conn->connect_errno . ")" . $conn->connect_error;
+              exit("Terminating php script"); // this should quit the php script
+            }
+            // TO DO: Have a null outpull too.
 
-            // Currently no connection check, but $conn needs to stay as mysqli object. Find how to check if mysqli is null and run php only on false. Have a null outpull too.
-
-            echo "Connected successfully, currently displays PROFESSORS Table"; 
+            // echo "Connected successfully, currently displays PROFESSORS Table"; 
             
             
             //sql_to_html_table converts sql results to html table
@@ -75,6 +74,7 @@
               return( $htmltable ) ; 
             }//END FUNCTION
             
+            //Query
             if( isset($_POST['SSNQuery']) ) {
                 $stringOfQuery="SELECT * FROM PROFESSORS ";
                 $stringOfQuery .= "where pSSN = '".$_POST['SSNQuery']."'";
@@ -87,7 +87,7 @@
             //retrieve results with current Query
             $sqlresult = $conn->query( $stringOfQuery ) ; 
             
-            mysqli_close();
+            mysqli_close($conn);
     
             //connect and enter mainform div ie yellow console 
             echo "<div style='text-align:left' class='table'>"; 
@@ -104,13 +104,10 @@
             CURRENT CWID:
             <?php echo $_POST["cwid"]; ?>
             <div style='padding-top: 100px' class='cell mainform'>
-                Hello
                 <?php echo $_POST["cwid"]; ?>
-
 
             </div>
         </div>
-
 </body>
 
 </html>
