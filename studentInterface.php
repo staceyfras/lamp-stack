@@ -34,8 +34,7 @@
     {
         if (isset($_POST['cwidQuery'])) {
             $stringOfQuery = "SELECT * FROM STUDENTS WHERE sCWID = '" . $_POST['cwidQuery'] . "'";
-            $sqlresult     = $conn->query($stringOfQuery);
-            echo "hi";
+            $sqlresult = $conn->query($stringOfQuery);
         }
         //These if statements are needed to determine which form was filled
         if (isset($_POST['classQuery'])) {
@@ -51,9 +50,9 @@
     {
         // starting table
         $htmltable = "<table style='border: 1px solid white'>" . $delim;
-        $counter   = 0;
+        $counter = 0;
         // putting in lines
-        while (($row == $result->fetch_assoc())) {
+        while ( $row = $result->fetch_assoc() ) {
             if ($counter == 0) {
                 // table header
                 $htmltable .= "<tr style='border: 1px solid white'>" . $delim;
@@ -80,16 +79,18 @@
   ?>
 
         <div style="text-align:left" class='table'>
-
-              <?php echo "CURRENT CWID:"; ?>
+              <?php echo "YOUR CWID:"; ?>
               <?php echo $_POST["cwidQuery"]; ?>
-            <div style='width: 1000px' class='cell mainform'>
-            <?php
-$sqlresult = get_query($conn);
-if ($sqlresult != null) {echo sql_to_html_table($sqlresult, $delim = "\n");} else {echo "Failed to print" . "\n";}
-?>
-            </div>
+          <div style='width: 1000px' class='cell mainform'>
+
+  <?php
+    $sqlresult = get_query($conn);
+    if ($sqlresult != null) { echo sql_to_html_table($sqlresult, $delim = "\n"); } 
+    else { echo "Failed to print" . "\n"; }
+    mysqli_close($conn);
+  ?>
+          </div>
         </div>
 </body>
 </html>
-<?php mysqli_close($conn);?>
+
