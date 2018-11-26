@@ -20,7 +20,7 @@
   </p>
 
   <br>
-  <div class='mainform'>
+
   <h3>Modify Search</h3>
     <form action="studentInterface.php" method="post">
                 Enter CWID to get the grades of all classes taken: 
@@ -37,7 +37,6 @@
               </input>
           </input>
       </form>
-    </div>
 
   <?php
     // Create connection for csuf server
