@@ -32,7 +32,7 @@ VALUES		("12344", "12345");
 INSERT INTO minors_in(minDepNum, minCWID)
 VALUES		(111, 12345678);
 
-INSERT INTO majors_inmajDepNum, majCWID)
+INSERT INTO majors_in(majDepNum, majCWID)
 VALUES		(111, 12345678);
 
 INSERT INTO sections(sNum, sCourseNum, sProfSSN, sClassroom, sSeats, sBeginTime, sEndTime)

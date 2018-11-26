@@ -1,98 +1,115 @@
 <html>
-
 <head>
-    <title>Professor Portal</title>
+    <title>Professor Portal -- Results</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
 <body>
-    <!------
-    NAVBAR, Interface links currently broken. May need to change these to clickable forms from href links to POST to php.
-    -->
   <p>
-      <a href="index.html" style="color:white">HOME</a> | <a href="info.html" style="color:white">INFO</a>
+            <a href="index.html" style="color:white">
+                RETURN HOME
+            </a>
+            |
+            <a href="professorPortal.html" style="color:white">
+                 RETURN PROFESSOR PORTAL
+            </a>
+            |
+            <a href="info.html" style="color:white">
+                INFO
+            </a>
   </p>
 
-  <form action="professorInterface.php" method="post">
-      Professor SSN: <input type="text" name="ssn">
-      <input type="submit" value="SUBMIT">
-  </form>
+  <br>
 
-    <!-------
-    Below php connects to sql db, contains a function that converts sql query to html tables, our current query, closes db, and and finishes our mainform table. 
-    -->
-  <?
-          $servername = "ecsmysql";
-          $username = "cs332a20"; 
-          $password = "hievoosi"; //change to server pass
+  <h3>Modify Search</h3>
+<form action="professorInterface.php" method="post">
+                Enter your SSN to get your classes
+                <br>
+                SSN: <input name="ssnQuery" type="text">
+                <input type="submit" value="SUBMIT">
 
-          // Create connection
-          $conn = new mysqli($servername, $username, $password, "cs332a20");
+            </form>
+            <br>
+                <form action="professorInterface.php" method="post">
+                    Enter a course number + section number to caluculate grade distribution: <br>
+                    Course Number: <input name ="cnumGrade" type="text">
+                    Section Number: <input name ="snumGrade" type="text">
+                    <input type="submit" value="SUBMIT">
+                </form>
+                <br>
 
-          // Currently no connection check, but $conn needs to stay as mysqli object. Find how to check if mysqli is null and run php only on false. Have a null outpull too.
-          
-  
-          //Doesn't actually know right now if successfull
-          echo "Connected successfully, currently displays PROFESSORS Table"; 
-          
-          
-          //sql_to_html_table converts sql results to html table
-          function sql_to_html_table($conn, $delim="\n") {
-                // starting table
-                $htmltable =  "<table style='border: 1px solid white'>" . $delim ;   
-                $counter   = 0 ;
-                // putting in lines
-                while( $row = $conn->fetch_assoc() ) {
-                  if ( $counter===0 ) {
+  <?php
+    // Create connection for csuf server
+    //conn = new mysqli("ecsmysql", "cs332a20", "hievoosi", "database_name")
+
+    $conn = new mysqli("localhost", "root", "", "cs332a18");
+    //Check connection. Quit if failed.
+    if ($conn->connect_errno) {
+        echo "failed to connect to MySql: (" . $conn->connect_errno . ")" . $conn->connect_error;
+        exit("Terminating..."); // this should quit the php script
+    }
+
+    function get_query($conn)
+    {
+        //Query: Display classes of given professor SSN
+        if (isset($_POST['ssnQuery'])) {
+            $stringOfQuery = "SELECT cTitle, sClassroom, sBeginTime, sEndTime, mSectionNum, mDays from SECTIONS INNER JOIN PROFESSORS on SECTIONS.sProfSSN = PROFESSORS.pSSN INNER JOIN COURSES on SECTIONS.sCourseNum = COURSES.cNum INNER JOIN MEETING_DAYS on SECTIONS.sNum=MEETING_DAYS.mSectionNum WHERE Professors.pSSN= '" . $_POST['ssnQuery'] . "'";
+            $sqlresult = $conn->query($stringOfQuery);
+        }
+        //Query: Count grades of course section
+        if (isset($_POST['cnumGrade']) && isset($_POST['snumGrade'])){
+            //placeholder function
+            $stringOfQuery = "SELECT cTitle, sNum, rGrade, COUNT(rGrade) FROM sections INNER JOIN courses on sCourseNum=Cnum INNER JOIN records on sNum = rSecNum WHERE cNum='" . $_POST['cnumGrade'] . "'" . " AND sNum= '" . $_POST['snumGrade'] . "'";
+            $sqlresult = $conn->query($stringOfQuery);
+        }
+
+        return $sqlresult;
+    }
+
+    function sql_to_html_table($result, $delim = "\n")
+    {
+        // starting table
+        $htmltable = "<table style='border: 1px solid white'>" . $delim;
+        $counter = 0;
+        // putting in lines
+        while ( $row = $result->fetch_assoc() ) {
+            if ($counter == 0) {
                 // table header
-                $htmltable .=   "<tr style='border: 1px solid white'>"  . $delim;
-                foreach ($row as $key => $value ) {
-                    $htmltable .=   "<th style='border: 1px solid white'>" . $key . "</th>"  . $delim ;
+                $htmltable .= "<tr style='border: 1px solid white'>" . $delim;
+                foreach ($row as $key => $value) {
+                    $htmltable .= "<th style='border: 1px solid white'>" . $key . "</th>" . $delim;
                 }
-                $htmltable .=   "</tr>"  . $delim ; 
-                $counter = 22;
-              } 
-                // table body
-                $htmltable .=   "<tr style='border: 1px solid white'>"  . $delim ;
-                foreach ($row as $key => $value ) {
-                    $htmltable .=   "<td style='border: 1px solid yellow'>" . $value . "</td>"  . $delim ;
-                }
-                $htmltable .=   "</tr>"   . $delim ;
+                $htmltable .= "</tr>" . $delim;
+                $counter++;
             }
-            // closing table
-            $htmltable .=   "</table>"   . $delim ; 
-            // return
-            return( $htmltable ) ; 
-          }//END FUNCTION
-          
-          //QUERY
-          $sqlresult = $conn->query( "SELECT * FROM PROFESSORS;" ) ; 
-  
-          //close mysqli connection
-          mysqli_close();
-  
-          //connect and enter mainform div ie yellow console 
-          echo "<div style='text-align:left' class='table'>"; 
-          echo "CURRENT CWID:"; 
-          echo $_POST["cwid"]; 
-          echo "<br> <div style='width: 1000px' class='cell mainform'>"; 
-          echo sql_to_html_table( $sqlresult, $delim="\n" ) ;
-          echo "</div>"; 
-          echo "</div>"; 
-    ?>
+            // table body
+            $htmltable .= "<tr style='border: 1px solid white'>" . $delim;
+            foreach ($row as $key => $value) {
+                $htmltable .= "<td style='border: 1px solid yellow'>" . $value . "</td>" . $delim;
+            }
+            $htmltable .= "</tr>" . $delim;
+        }
+        // closing table
+        $htmltable .= "</table>" . $delim;
+        // return
+        $result->free();
+        return ($htmltable);
+    } //END FUNCTION
 
-    <br>
-    <div style="text-align:left" class='table'>
-        CURRENT CWID:
-        <?php echo $_POST["cwid"]; ?>
-        <div style='padding-top: 100px' class='cell mainform'>
-            Hello
-            <?php echo $_POST["cwid"]; ?>
+  ?>
+  <h3>Results</h3>
+  <div style="text-align:left" class='table'>   
+  <?php
+    $sqlresult = get_query($conn);
+    
+    if ($sqlresult != null) { echo sql_to_html_table($sqlresult, $delim = "\n"); } 
+    else { echo "Failed to print" . "\n"; }
+    
+    mysqli_close($conn);
+  ?>
 
-
-        </div>
-    </div>
-
+  </div>
+        
 </body>
-
 </html>
+

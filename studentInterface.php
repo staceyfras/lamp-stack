@@ -23,19 +23,15 @@
 
   <h3>Modify Search</h3>
     <form action="studentInterface.php" method="post">
-                Enter CWID to get the grades of all classes taken: 
-                <input name="cwidQuery" type="text">
-                    <input type="submit" value="SUBMIT">
-                    </input>
-                </input>
+                Enter CWID to get the grades of all classes taken: <br>
+                CWID: <input name="cwidQuery" type="text">
+                <input type="submit" value="SUBMIT">
     </form>
             <br>
       <form action="studentInterface.php" method="post">
           Enter course number to get all sections of that course: 
-          <input name="courseQuery" type="text">
-              <input type="submit" value="SUBMIT">
-              </input>
-          </input>
+          Course Number: <input name="courseQuery" type="text">
+          <input type="submit" value="SUBMIT">
       </form>
 
   <?php
@@ -56,7 +52,7 @@
             $stringOfQuery = "SELECT cTitle, rSecNum, rGrade from RECORDS INNER JOIN SECTIONS on RECORDS.rSecNum = SECTIONS.Snum INNER JOIN COURSES on SECTIONS.sCourseNum = COURSES.cNum WHERE RECORDS.rCWID = '" . $_POST['cwidQuery'] . "'";
             $sqlresult = $conn->query($stringOfQuery);
         }
-        //These if statements are needed to determine which form was filled
+        //Query: Display sections available of a given course
         if (isset($_POST['courseQuery'])) {
             //placeholder function
             $stringOfQuery = "SELECT * from SECTIONS INNER JOIN COURSES WHERE cNum = '" . $_POST['courseQuery'] . "'";

@@ -23,19 +23,18 @@
         <br>
             <!-- Going to add in buttons that change query or append to it -->
             <form action="professorInterface.php" method="post">
-                Student CWID:
-                <input name="cwidQuery" type="text">
-                    <input type="submit" value="SUBMIT">
-                    </input>
-                </input>
+                Enter your SSN to get your classes
+                <br>
+                SSN: <input name="ssnQuery" type="text">
+                <input type="submit" value="SUBMIT">
+
             </form>
             <br>
                 <form action="professorInterface.php" method="post">
-                    First Name:
-                    <input name="nameQuery" type="text">
-                        <input type="submit" value="SUBMIT">
-                        </input>
-                    </input>
+                    Enter a course number + section number to caluculate grade distribution: <br>
+                    Course Number: <input name ="gradeQuery" type="text" id="cnum">
+                    Section Number: <input name ="gradeQuery" type="text" id="snum">
+                    <input type="submit" value="SUBMIT">
                 </form>
                 <br>
     </body>
