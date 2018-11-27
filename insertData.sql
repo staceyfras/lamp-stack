@@ -26,7 +26,7 @@ VALUES		(12345678, "Kyle", "Guss", "(949)9992222", "1000 Pictor Ct", "Trabuco Ca
 INSERT INTO degrees(degreeName, degreeProfSSN)
 VALUES		("Mathematics", 666666666), ("Physics", 666666666);
 
-INSERT INTO prerequisites(prqNum, prqOfNum)
+INSERT INTO prereqs(prqNum, prqOfNum)
 VALUES		("12344", "12345");
 
 INSERT INTO minors_in(minDepNum, minCWID)

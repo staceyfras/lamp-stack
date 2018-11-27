@@ -74,7 +74,7 @@ CREATE TABLE students
   ); 
 
 
-CREATE TABLE degrees_professors 
+CREATE TABLE degrees
   ( 
      degreeName      VARCHAR(50) NOT NULL, 
      degreeProfSSN   INT(9),
@@ -84,7 +84,7 @@ CREATE TABLE degrees_professors
      
   ); 
 
-CREATE TABLE prereq_courses 
+CREATE TABLE prereq
   (   
      prqNum          INT(5),
      CONSTRAINT `fk_course_prereqNum`
