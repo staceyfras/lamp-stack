@@ -4,6 +4,7 @@ Remember to use correct credentials for server login on our Interfaces.
 
 ### Loading/Editing
 mysql -h cs332a20 -p (kyle's? use your own for testing purposes)
+mysql -h cs332a18 -p (stacey's - kexoocei)
 NOTICE: createTables.sql does not have proper username usage
 
 Load files into mysql: source <filename.sql>
