@@ -42,8 +42,8 @@ CREATE TABLE departments
      dPhone         VARCHAR(25) NOT NULL, 
      dOffice        VARCHAR(10) NOT NULL,
      dChairperson   INT(9), 
-        FOREIGN KEY (dChairperson) REFERENCES professors(pSSN)
-        ON DELETE CASCADE ON UPDATE NO ACTION
+      FOREIGN KEY (dChairperson) REFERENCES professors(pSSN)
+      ON DELETE CASCADE ON UPDATE NO ACTION
   ); 
  
 
@@ -55,7 +55,7 @@ CREATE TABLE courses
      cTextbook       VARCHAR(50), 
      cUnits          INT(1) NOT NULL,
       FOREIGN KEY (cDeptNum) REFERENCES departments(dNum)
-        ON DELETE CASCADE ON UPDATE NO ACTION
+      ON DELETE CASCADE ON UPDATE NO ACTION
   ); 
   
 
@@ -76,22 +76,19 @@ CREATE TABLE degrees_professors
   ( 
      degreeName      VARCHAR(50) NOT NULL, 
      degreeProfSSN   INT(9),
-     CONSTRAINT `fk_professor_degree`
-        FOREIGN KEY(degreeProfSSN) REFERENCES PROFESSORS(pSSN) 
-        ON DELETE SET NULL ON UPDATE NO ACTION
+      FOREIGN KEY(degreeProfSSN) REFERENCES PROFESSORS(pSSN) 
+      ON DELETE SET NULL ON UPDATE NO ACTION
      
   ); 
 
 CREATE TABLE prereq_courses 
   (   
      prqNum          INT(5),
-     CONSTRAINT `fk_course_prereqNum`
-        FOREIGN KEY (prqNum) REFERENCES COURSES(cNum)
-        ON DELETE CASCADE ON UPDATE NO ACTION,
+      FOREIGN KEY (prqNum) REFERENCES COURSES(cNum)
+      ON DELETE CASCADE ON UPDATE NO ACTION,
      prqOfNum        INT(5), 
-     CONSTRAINT `fk_course_prereqOfNum`
-        FOREIGN KEY (prqOfNum) REFERENCES COURSES(cNum)
-        ON DELETE CASCADE ON UPDATE NO ACTION
+      FOREIGN KEY (prqOfNum) REFERENCES COURSES(cNum)
+      ON DELETE CASCADE ON UPDATE NO ACTION
       
   ); 
 
@@ -100,26 +97,22 @@ CREATE TABLE prereq_courses
 CREATE TABLE minors_in 
   ( 
      minDepNum        INT(3) NOT NULL,
-     CONSTRAINT `fk_minor_depnum`
-        FOREIGN KEY(minDepNum) REFERENCES DEPARTMENTS(dNum) 
-        ON DELETE CASCADE ON UPDATE NO ACTION,
+      FOREIGN KEY(minDepNum) REFERENCES DEPARTMENTS(dNum) 
+      ON DELETE CASCADE ON UPDATE NO ACTION,
      minCWID          INT(8) NOT NULL, 
-     CONSTRAINT `fk_minor_studentcwid`
-        FOREIGN KEY(minCWID) REFERENCES STUDENTS(sCWID)
-        ON DELETE CASCADE ON UPDATE NO ACTION
+      FOREIGN KEY(minCWID) REFERENCES STUDENTS(sCWID)
+      ON DELETE CASCADE ON UPDATE NO ACTION
      
   ); 
 
 CREATE TABLE majors_in
   ( 
      majDepNum        INT(3) NOT NULL,
-     CONSTRAINT `fk_major_depnum`
-        FOREIGN KEY(majDepNum) REFERENCES DEPARTMENTS(dNum) 
-        ON DELETE CASCADE ON UPDATE NO ACTION,
+      FOREIGN KEY(majDepNum) REFERENCES DEPARTMENTS(dNum) 
+      ON DELETE CASCADE ON UPDATE NO ACTION,
      majCWID          INT(8) NOT NULL, 
-     CONSTRAINT `fk_major_studentcwid`
-        FOREIGN KEY(majCWID) REFERENCES STUDENTS(sCWID)
-        ON DELETE CASCADE ON UPDATE NO ACTION
+      FOREIGN KEY(majCWID) REFERENCES STUDENTS(sCWID)
+      ON DELETE CASCADE ON UPDATE NO ACTION
      
   );   
 
@@ -127,13 +120,11 @@ CREATE TABLE sections
   ( 
      sNum             INT(4) PRIMARY KEY, 
      sCourseNum       INT(5),
-     CONSTRAINT `fk_course_number`
-        FOREIGN KEY(sCourseNum) REFERENCES COURSES(cNum)
-        ON DELETE CASCADE ON UPDATE NO ACTION,
+      FOREIGN KEY(sCourseNum) REFERENCES COURSES(cNum)
+      ON DELETE CASCADE ON UPDATE NO ACTION,
      sProfSSN         INT(9), 
-     CONSTRAINT `fk_professor_ssn`
-        FOREIGN KEY(sProfSSN) REFERENCES PROFESSORS(pSSN) 
-        ON DELETE CASCADE ON UPDATE NO ACTION,
+      FOREIGN KEY(sProfSSN) REFERENCES PROFESSORS(pSSN) 
+      ON DELETE CASCADE ON UPDATE NO ACTION,
      sClassroom       VARCHAR(10) NOT NULL, 
      sSeats           INT(3) NOT NULL, 
      sBeginTime       TIME NOT NULL, 
@@ -144,20 +135,17 @@ CREATE TABLE sections
 CREATE TABLE meeting_days 
   (
     mSectionNum       INT(4),
-    CONSTRAINT `fk_section_num`
-          FOREIGN KEY(mSectionNum) REFERENCES SECTIONS(sNum)
-          ON DELETE CASCADE ON UPDATE NO ACTION,
+      FOREIGN KEY(mSectionNum) REFERENCES SECTIONS(sNum)
+      ON DELETE CASCADE ON UPDATE NO ACTION,
     mDays             ENUM('Mon','Tues','Wed','Thurs','Fri','Sat')
   );
 
 CREATE TABLE records
   ( 
      rCWID           INT(8), 
-     CONSTRAINT `fk_student_cwid`
        FOREIGN KEY(rCWID) REFERENCES STUDENTS(sCWID)
        ON DELETE CASCADE ON UPDATE NO ACTION,
      rSecNum         INT(4) PRIMARY KEY,
-     CONSTRAINT `fk_records_sectionnum`
        FOREIGN KEY(rSecNum) REFERENCES SECTIONS(sNum)
        ON DELETE CASCADE ON UPDATE NO ACTION, 
      rGrade          ENUM('A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 
