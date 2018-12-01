@@ -20,8 +20,8 @@
     <br>
     <?php
     // Create connection for csuf server
-    //conn = new mysqli("ecsmysql", "cs332a20", "hievoosi", "database_name")
-    $conn = new mysqli("localhost", "root", "", "cs332a18");
+    $conn = new mysqli("ecsmysql", "cs332a18", "kexoosei", "cs332a18")
+    //$conn = new mysqli("localhost", "root", "", "cs332a18");
     //Check connection. Quit if failed.
     if ($conn->connect_errno) {
     echo "failed to connect to MySql: (" . $conn->connect_errno . ")" . $conn->connect_error;
