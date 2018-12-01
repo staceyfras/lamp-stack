@@ -23,10 +23,10 @@ VALUES	(12345, 111, "Calculus II", "Calculus II, For Dumbies", 3), (12344, 111, 
 INSERT INTO students(sCWID, sFName, sLName, sPhone, sStreet, sCity, sState, sZip)
 VALUES		(12345678, "Kyle", "Guss", "(949)9992222", "1000 Pictor Ct", "Trabuco Canyon", "CA", 92679);
 
-INSERT INTO degrees(degreeName, degreeProfSSN)
+INSERT INTO degrees_professors(degreeName, degreeProfSSN)
 VALUES		("Mathematics", 666666666), ("Physics", 666666666);
 
-INSERT INTO prereqs(prqNum, prqOfNum)
+INSERT INTO prereq_courses(prqNum, prqOfNum)
 VALUES		("12344", "12345");
 
 INSERT INTO minors_in(minDepNum, minCWID)
