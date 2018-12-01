@@ -77,7 +77,8 @@ CREATE TABLE degrees_professors
      degreeName      VARCHAR(50) NOT NULL, 
      degreeProfSSN   INT(9),
       FOREIGN KEY(degreeProfSSN) REFERENCES professors(pSSN) 
-      ON DELETE CASCADE ON UPDATE NO ACTION
+      ON DELETE CASCADE ON UPDATE NO ACTION,
+      UNIQUE (degreeName, degreeProfSSN)
      
   ); 
 
@@ -88,7 +89,8 @@ CREATE TABLE prereq_courses
       ON DELETE CASCADE ON UPDATE NO ACTION,
      prqOfNum        INT(5), 
       FOREIGN KEY (prqOfNum) REFERENCES courses(cNum)
-      ON DELETE CASCADE ON UPDATE NO ACTION
+      ON DELETE CASCADE ON UPDATE NO ACTION,
+      UNIQUE (prqNum, prqOfNum)
       
   ); 
 
@@ -101,7 +103,8 @@ CREATE TABLE minors_in
       ON DELETE CASCADE ON UPDATE NO ACTION,
      minCWID          INT(8) NOT NULL, 
       FOREIGN KEY(minCWID) REFERENCES students(sCWID)
-      ON DELETE CASCADE ON UPDATE NO ACTION
+      ON DELETE CASCADE ON UPDATE NO ACTION,
+      UNIQUE (minDepNum, minCWID)
      
   ); 
 
@@ -112,7 +115,8 @@ CREATE TABLE majors_in
       ON DELETE CASCADE ON UPDATE NO ACTION,
      majCWID          INT(8) NOT NULL, 
       FOREIGN KEY(majCWID) REFERENCES students(sCWID)
-      ON DELETE CASCADE ON UPDATE NO ACTION
+      ON DELETE CASCADE ON UPDATE NO ACTION,
+     UNIQUE (majDepNum, majCWID)
      
   );   
 
@@ -137,7 +141,8 @@ CREATE TABLE meeting_days
     mSectionNum       INT(4),
       FOREIGN KEY(mSectionNum) REFERENCES sections(sNum)
       ON DELETE CASCADE ON UPDATE NO ACTION,
-    mDays             ENUM('Mon','Tues','Wed','Thurs','Fri','Sat')
+    mDays             ENUM('Mon','Tues','Wed','Thurs','Fri','Sat'),
+    UNIQUE (mSectionNum, mDays)
   );
 
 CREATE TABLE records
