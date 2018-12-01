@@ -42,8 +42,7 @@ CREATE TABLE departments
      dPhone         VARCHAR(25) NOT NULL, 
      dOffice        VARCHAR(10) NOT NULL,
      dChairperson   INT(9), 
-     CONSTRAINT `fk_chairperson`
-        FOREIGN KEY (dChairperson) REFERENCES PROFESSORS(pSSN)
+        FOREIGN KEY (dChairperson) REFERENCES professors(pSSN)
         ON DELETE CASCADE ON UPDATE NO ACTION
   ); 
  
@@ -52,12 +51,11 @@ CREATE TABLE courses
   ( 
      cNum            INT(5) PRIMARY KEY, 
      cDeptNum        INT(3) NOT NULL,
-     CONSTRAINT `fk_course_deptnum`
-        FOREIGN KEY (cDeptNum) REFERENCES DEPARTMENTS(dNum)
-        ON DELETE CASCADE ON UPDATE NO ACTION,
      cTitle          VARCHAR(50) NOT NULL, 
      cTextbook       VARCHAR(50), 
-     cUnits          INT(1) NOT NULL
+     cUnits          INT(1) NOT NULL,
+      FOREIGN KEY (cDeptNum) REFERENCES departments(dNum)
+        ON DELETE CASCADE ON UPDATE NO ACTION
   ); 
   
 
@@ -164,11 +162,4 @@ CREATE TABLE records
        ON DELETE CASCADE ON UPDATE NO ACTION, 
      rGrade          ENUM('A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 
                           'C', 'C-', 'D+', 'D', 'D-', 'F') 
-  ); 
-     
-  
-
-
-
- 
-
+  );
