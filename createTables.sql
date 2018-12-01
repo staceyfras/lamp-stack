@@ -76,18 +76,18 @@ CREATE TABLE degrees_professors
   ( 
      degreeName      VARCHAR(50) NOT NULL, 
      degreeProfSSN   INT(9),
-      FOREIGN KEY(degreeProfSSN) REFERENCES PROFESSORS(pSSN) 
-      ON DELETE SET NULL ON UPDATE NO ACTION
+      FOREIGN KEY(degreeProfSSN) REFERENCES professors(pSSN) 
+      ON DELETE CASCADE ON UPDATE NO ACTION
      
   ); 
 
 CREATE TABLE prereq_courses 
   (   
      prqNum          INT(5),
-      FOREIGN KEY (prqNum) REFERENCES COURSES(cNum)
+      FOREIGN KEY (prqNum) REFERENCES courses(cNum)
       ON DELETE CASCADE ON UPDATE NO ACTION,
      prqOfNum        INT(5), 
-      FOREIGN KEY (prqOfNum) REFERENCES COURSES(cNum)
+      FOREIGN KEY (prqOfNum) REFERENCES courses(cNum)
       ON DELETE CASCADE ON UPDATE NO ACTION
       
   ); 
@@ -97,10 +97,10 @@ CREATE TABLE prereq_courses
 CREATE TABLE minors_in 
   ( 
      minDepNum        INT(3) NOT NULL,
-      FOREIGN KEY(minDepNum) REFERENCES DEPARTMENTS(dNum) 
+      FOREIGN KEY(minDepNum) REFERENCES departments(dNum) 
       ON DELETE CASCADE ON UPDATE NO ACTION,
      minCWID          INT(8) NOT NULL, 
-      FOREIGN KEY(minCWID) REFERENCES STUDENTS(sCWID)
+      FOREIGN KEY(minCWID) REFERENCES students(sCWID)
       ON DELETE CASCADE ON UPDATE NO ACTION
      
   ); 
@@ -108,10 +108,10 @@ CREATE TABLE minors_in
 CREATE TABLE majors_in
   ( 
      majDepNum        INT(3) NOT NULL,
-      FOREIGN KEY(majDepNum) REFERENCES DEPARTMENTS(dNum) 
+      FOREIGN KEY(majDepNum) REFERENCES departments(dNum) 
       ON DELETE CASCADE ON UPDATE NO ACTION,
      majCWID          INT(8) NOT NULL, 
-      FOREIGN KEY(majCWID) REFERENCES STUDENTS(sCWID)
+      FOREIGN KEY(majCWID) REFERENCES students(sCWID)
       ON DELETE CASCADE ON UPDATE NO ACTION
      
   );   
@@ -120,10 +120,10 @@ CREATE TABLE sections
   ( 
      sNum             INT(4) PRIMARY KEY, 
      sCourseNum       INT(5),
-      FOREIGN KEY(sCourseNum) REFERENCES COURSES(cNum)
+      FOREIGN KEY(sCourseNum) REFERENCES courses(cNum)
       ON DELETE CASCADE ON UPDATE NO ACTION,
      sProfSSN         INT(9), 
-      FOREIGN KEY(sProfSSN) REFERENCES PROFESSORS(pSSN) 
+      FOREIGN KEY(sProfSSN) REFERENCES professors(pSSN) 
       ON DELETE CASCADE ON UPDATE NO ACTION,
      sClassroom       VARCHAR(10) NOT NULL, 
      sSeats           INT(3) NOT NULL, 
@@ -135,7 +135,7 @@ CREATE TABLE sections
 CREATE TABLE meeting_days 
   (
     mSectionNum       INT(4),
-      FOREIGN KEY(mSectionNum) REFERENCES SECTIONS(sNum)
+      FOREIGN KEY(mSectionNum) REFERENCES sections(sNum)
       ON DELETE CASCADE ON UPDATE NO ACTION,
     mDays             ENUM('Mon','Tues','Wed','Thurs','Fri','Sat')
   );
@@ -143,10 +143,10 @@ CREATE TABLE meeting_days
 CREATE TABLE records
   ( 
      rCWID           INT(8), 
-       FOREIGN KEY(rCWID) REFERENCES STUDENTS(sCWID)
+       FOREIGN KEY(rCWID) REFERENCES students(sCWID)
        ON DELETE CASCADE ON UPDATE NO ACTION,
      rSecNum         INT(4) PRIMARY KEY,
-       FOREIGN KEY(rSecNum) REFERENCES SECTIONS(sNum)
+       FOREIGN KEY(rSecNum) REFERENCES sections(sNum)
        ON DELETE CASCADE ON UPDATE NO ACTION, 
      rGrade          ENUM('A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 
                           'C', 'C-', 'D+', 'D', 'D-', 'F') 
