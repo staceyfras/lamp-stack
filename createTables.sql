@@ -162,4 +162,4 @@ CREATE TABLE records
        ON DELETE CASCADE ON UPDATE NO ACTION, 
      rGrade          ENUM('A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 
                           'C', 'C-', 'D+', 'D', 'D-', 'F') 
-  );
+  ); 
