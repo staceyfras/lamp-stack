@@ -20,27 +20,32 @@
         <br>
         <?php
         // Create connection for csuf server
+        // param @ conn(server, user, password, database_name)
         $conn = new mysqli("ecsmysql", "cs332a18", "kexoocei", "cs332a18");
         //$conn = new mysqli("localhost", "root", "", "cs332a18");
         //Check connection. Quit if failed.
         if ($conn->connect_errno) {
-        echo "failed to connect to MySql: (" . $conn->connect_errno . ")" . $conn->connect_error;
-        exit("Terminating..."); // this should quit the php script
+            echo "failed to connect to MySql: (" . $conn->connect_errno . ")" . $conn->connect_error;
+            exit("Terminating..."); // this should quit the php script
         }
         function get_query($conn)
         {
-        //Query: Display Grades + Classes of given CWID
-        if (isset($_POST['cwidQuery'])) {
-        $stringOfQuery = "SELECT cTitle, rSecNum, rGrade from RECORDS INNER JOIN SECTIONS on RECORDS.rSecNum = SECTIONS.Snum INNER JOIN COURSES on SECTIONS.sCourseNum = COURSES.cNum WHERE RECORDS.rCWID = '" . $_POST['cwidQuery'] . "'";
-        $sqlresult = $conn->query($stringOfQuery);
-        }
-        //Query: Display sections available of a given course
-        if (isset($_POST['courseQuery'])) {
-        //placeholder function
-        $stringOfQuery = "SELECT * from SECTIONS INNER JOIN COURSES WHERE cNum = '" . $_POST['courseQuery'] . "'";
-        $sqlresult = $conn->query($stringOfQuery);
-        }
-        return $sqlresult;
+            //Query: Display Grades + Classes of given CWID
+            if (isset($_POST['cwidQuery'])) {
+                $stringOfQuery = "SELECT cTitle, rSecNum, rGrade from records INNER JOIN sections on records.rSecNum = sections.Snum INNER JOIN courses on sections.sCourseNum = courses.cNum WHERE records.rCWID = '" . $_POST['cwidQuery'] . "'";
+                if($sqlresult = $conn->query($stringOfQuery) == FALSE) {
+                  printf("Error: %s\n", $conn->error);
+                }
+            }
+            //Query: Display sections available of a given course
+            if (isset($_POST['courseQuery'])) {
+            //placeholder function
+                $stringOfQuery = "SELECT * from sections INNER JOIN courses WHERE cNum = '" . $_POST['courseQuery'] . "'";
+                if($sqlresult = $conn->query($stringOfQuery) == FALSE) {
+                  printf("Error: %s\n", $conn->error);
+                }
+            }
+            return $sqlresult;
         }
         function sql_to_html_table($result, $delim = "\n")
         {
@@ -49,23 +54,23 @@
         $counter = 0;
         // putting in lines
         while ( $row = $result->fetch_assoc() ) {
-        if ($counter == 0) {
+            if ($counter == 0) {
         // table header
-        $htmltable .= "<tr style='border: 1px solid white'>" . $delim;
-        foreach ($row as $key => $value) {
-        $htmltable .= "<th style='border: 1px solid white'>" . $key . "</th>" . $delim;
-        }
-        $htmltable .= "</tr>" . $delim;
-        $counter++;
-        }
+                $htmltable .= "<tr style='border: 1px solid white'>" . $delim;
+                foreach ($row as $key => $value) {
+                    $htmltable .= "<th style='border: 1px solid white'>" . $key . "</th>" . $delim;
+                }
+                $htmltable .= "</tr>" . $delim;
+                $counter++;
+            }
         // table body
-        $htmltable .= "<tr style='border: 1px solid white'>" . $delim;
-        foreach ($row as $key => $value) {
-        $htmltable .= "<td style='border: 1px solid yellow'>" . $value . "</td>" . $delim;
+            $htmltable .= "<tr style='border: 1px solid white'>" . $delim;
+            foreach ($row as $key => $value) {
+                $htmltable .= "<td style='border: 1px solid yellow'>" . $value . "</td>" . $delim;
+            }
+            $htmltable .= "</tr>" . $delim;
         }
-        $htmltable .= "</tr>" . $delim;
-        }
-        // closing table
+            // closing table
         $htmltable .= "</table>" . $delim;
         // return
         $result->free();
