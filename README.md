@@ -14,12 +14,13 @@ student + professor portal + query are completed.
 all .sql files are successful.
 
 TODO:
-insertData.sql needs to be populated with data corresponding to project outline.
+insertData.sql needs to be populated with data corresponding to project requirements.
 
 drop table if exists implementation?
 
 delete table .sql?
 
+#4 - #6 on project requirements
 
 
 
