@@ -10,6 +10,7 @@ Reqs:
 4 courses
 6 sections
 */ 
+--USE cs332a18;
 
 INSERT INTO professors(pSSN, pFName, pLName, pStreet, pCity, pState, pZip, pSex, pPhone, pTitle)
 VALUES		(666666666, "Clippers", "Thunder", "15 Stage College Lane", "Fullerton", "CA", 92831, "M", "8005555555", "Dr");

@@ -12,12 +12,12 @@ COURSES     = 5 digits
 SECTIONS    = 4 digits
 DEPARTMENTS = 3 digits
 */ 
-USE cs332a18;
+USE cs332a19;
 
 /*
 Currently does not drop all tables due to foreign key restraints
 */
--- DROP TABLE IF EXISTS PROFESSORS, STUDENTS, COURSES, SECTIONS, DEPARTMENTS, MINORS, RECORDS, DEGREES, PREREQUISITES, MINORS;
+--DROP TABLE IF EXISTS professors, departments, courses, students, degrees_professors, prereq_courses, minors_in, majors_in, sections, meeting_days, records
 
 
 CREATE TABLE professors 
