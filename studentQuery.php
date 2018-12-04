@@ -21,8 +21,8 @@
         <?php
         // Create connection for csuf server
         // param @ conn(server, user, password, database_name)
-        $conn = new mysqli("ecsmysql", "cs332a18", "kexoocei", "cs332a18");
-        //$conn = new mysqli("localhost", "root", "", "cs332a18");
+        //$conn = new mysqli("ecsmysql", "cs332a18", "kexoocei", "cs332a18");
+        $conn = new mysqli("localhost", "root", "", "cs332a19");
         //Check connection. Quit if failed.
         if ($conn->connect_errno) {
             echo "failed to connect to MySql: (" . $conn->connect_errno . ")" . $conn->connect_error;
@@ -31,17 +31,21 @@
         function get_query($conn)
         {
             //Query: Display Grades + Classes of given CWID
-            if (isset($_POST['cwidQuery'])) {
-                $stringOfQuery = "SELECT cTitle, rSecNum, rGrade from records INNER JOIN sections on records.rSecNum = sections.Snum INNER JOIN courses on sections.sCourseNum = courses.cNum WHERE records.rCWID = '" . $_POST['cwidQuery'] . "'";
-                if($sqlresult = $conn->query($stringOfQuery) == FALSE) {
+            if (isset($_POST["cwidQuery"])) {
+                $cwid = $_POST["cwidQuery"];
+                $stringOfQuery = "SELECT cTitle, rSecNum, rGrade from records INNER JOIN sections on records.rSecNum = sections.Snum INNER JOIN courses on sections.sCourseNum = courses.cNum WHERE records.rCWID =${cwid};";
+                $sqlresult = $conn->query($stringOfQuery);
+                if($sqlresult->num_rows <= 0) {
                   printf("Error: %s\n", $conn->error);
                 }
             }
             //Query: Display sections available of a given course
-            if (isset($_POST['courseQuery'])) {
+            if (isset($_POST["courseQuery"])) {
             //placeholder function
-                $stringOfQuery = "SELECT * from sections INNER JOIN courses WHERE cNum = '" . $_POST['courseQuery'] . "'";
-                if($sqlresult = $conn->query($stringOfQuery) == FALSE) {
+                $course = $_POST["courseQuery"];
+                $stringOfQuery = "SELECT * from sections INNER JOIN courses WHERE cNum =${course};";
+                $sqlresult = $conn->query($stringOfQuery);
+                if($sqlresult->num_rows <= 0) {
                   printf("Error: %s\n", $conn->error);
                 }
             }
