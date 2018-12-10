@@ -1,0 +1,41 @@
+<html>
+<head>
+    <title>Student Portal</title>
+    <link href="styles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <p>
+        <a href="index.html" style="color:white">
+            RETURN HOME
+        </a>
+        |
+        <a href="info.html" style="color:white">
+            INFO
+        </a>
+    </p>
+    <div class='table'>
+        <div class='cell'>
+            <div class='mainform'>
+                <h2>
+                    Student Portal
+                </h2>
+                <p> Welcome! </p>
+                <br>
+                <!-- Going to add in buttons that change query or append to it -->
+                <form action="studentQuery.php" method="post">
+                    Enter CWID to get the grades of all classes taken: <br>
+                    CWID: <input name="cwidQuery" type="text">
+                    <input type="submit" value="SUBMIT">
+                </form>
+                <br>
+                <form action="studentQuery.php" method="post">
+                  Enter course number to get all sections of that course: <br>
+                  Course Number: <input name="courseQuery" type="text">
+                  <input type="submit" value="SUBMIT">
+              </form>
+
+          </div>
+      </div>
+  </div>
+</body>
+</html>

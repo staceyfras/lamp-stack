@@ -12,201 +12,147 @@ COURSES     = 5 digits
 SECTIONS    = 4 digits
 DEPARTMENTS = 3 digits
 */ 
-USE cs332a20;
+USE cs332a19;
 
 /*
 Currently does not drop all tables due to foreign key restraints
 */
-DROP TABLE IF EXISTS PROFESSORS, STUDENTS, COURSES, SECTIONS, DEPARTMENTS, MINORS, RECORDS, DEGREES, PREREQUISITES, MINORS;
+--DROP TABLE IF EXISTS professors, departments, courses, students, degrees_professors, prereq_courses, minors_in, majors_in, sections, meeting_days, records
 
 
-CREATE TABLE PROFESSORS 
+CREATE TABLE professors 
   ( 
-     pSSN        INT(9) NOT NULL, 
-     pFName      VARCHAR(50) NOT NULL, 
-     pLName      VARCHAR(50) NOT NULL, 
-     pStreet     VARCHAR(50) NOT NULL, 
-     pCity       VARCHAR(50) NOT NULL, 
-     pState      CHAR(2) NOT NULL, 
-     pZip        INT(6) NOT NULL, 
-     pSex        ENUM('M','F'), 
-     pPhone      VARCHAR(25) NOT NULL, 
-     pTitle      ENUM('Dr','Sr','Jr','Mrs','Mr','Ms'), 
-     PRIMARY KEY(pSSN) 
+     pSSN          INT(9) PRIMARY KEY, 
+     pFName        VARCHAR(50) NOT NULL, 
+     pLName        VARCHAR(50) NOT NULL, 
+     pStreet       VARCHAR(50) NOT NULL, 
+     pCity         VARCHAR(50) NOT NULL, 
+     pState        CHAR(2) NOT NULL, 
+     pZip          INT(6) NOT NULL, 
+     pSex          ENUM('M','F'), 
+     pPhone        VARCHAR(25) NOT NULL, 
+     pTitle        ENUM('Dr','Sr','Jr','Mrs','Mr','Ms')
   ); 
-/*
-PROFESSORS EXAMPLE
-____________________
-123456789
-Kyle
-Guss
-111 College Road
-Fullerton
-CA
-92831
-M
-(800)5551111
-Dr
-*/
 
-CREATE TABLE DEPARTMENTS 
+
+CREATE TABLE departments
   ( 
-     dNum          INT(3) NOT NULL, 
-     dName         VARCHAR(20) NOT NULL, 
-     dPhone        INT(10) NOT NULL, 
-     dOffice       VARCHAR(10) NOT NULL, 
-     dChairmanSSN  INT(9) NOT NULL, 
-     PRIMARY KEY(dNum, dChairmanSSN), 
-     FOREIGN KEY(dChairmanSSN) REFERENCES PROFESSORS(pSSN) 
+     dNum           INT(3) PRIMARY KEY, 
+     dName          VARCHAR(20) NOT NULL, 
+     dPhone         VARCHAR(25) NOT NULL, 
+     dOffice        VARCHAR(10) NOT NULL,
+     dChairperson   INT(9), 
+      FOREIGN KEY (dChairperson) REFERENCES professors(pSSN)
+      ON DELETE CASCADE ON UPDATE NO ACTION
   ); 
-/*
-DEPARTMENTS EXAMPLE
-____________________
-1234
-Mathematics
-(800)5551111
-MH400
-123456789
-*/  
+ 
 
-
-CREATE TABLE STUDENTS
+CREATE TABLE courses
   ( 
-     sCWID              INT(8) NOT NULL, 
-     studentDepNum INT(3) NOT NULL, 
-     sFName        VARCHAR(20) NOT NULL, 
-     sLName         VARCHAR(20) NOT NULL, 
-     sPhone             VARCHAR(20) NOT NULL, 
-     sStreet            VARCHAR(50) NOT NULL, 
-     sCity              VARCHAR(50) NOT NULL,
-     sState             CHAR(2) NOT NULL, 
-     sZip               INT(6) NOT NULL,
-     PRIMARY KEY(sCWID, studentDepNum), 
-     FOREIGN KEY(studentDepNum) REFERENCES DEPARTMENTS(dNum) 
+     cNum            INT(5) PRIMARY KEY, 
+     cDeptNum        INT(3) NOT NULL,
+     cTitle          VARCHAR(50) NOT NULL, 
+     cTextbook       VARCHAR(50), 
+     cUnits          INT(1) NOT NULL,
+      FOREIGN KEY (cDeptNum) REFERENCES departments(dNum)
+      ON DELETE CASCADE ON UPDATE NO ACTION
   ); 
-/*
-STUDENTS EXAMPLE
-____________________
-88888888
-11111
-Kyle
-Guss
-(800)1110011
-2000 College Place
-Fullerton
-CA
-92831
-*/
+  
 
-CREATE TABLE COURSES 
+CREATE TABLE students
   ( 
-     cNum               INT(5) NOT NULL, 
-     cDepNum            INT(3) NOT NULL, 
-     cTitle             VARCHAR(50) NOT NULL, 
-     cTextbook          VARCHAR(50) NOT NULL, 
-     cUnits             INT(1) NOT NULL, 
-     cPrereqNum         INT(5) NOT NULL,
-     PRIMARY KEY(cNum, cDepNum), 
-     FOREIGN KEY(cDepNum) REFERENCES DEPARTMENTS(dNum)
+     sCWID           INT(8) PRIMARY KEY, 
+     sFName          VARCHAR(20) NOT NULL, 
+     sLName          VARCHAR(20) NOT NULL, 
+     sPhone          VARCHAR(20) NOT NULL, 
+     sStreet         VARCHAR(50) NOT NULL, 
+     sCity           VARCHAR(50) NOT NULL,
+     sState          CHAR(2) NOT NULL, 
+     sZip            INT(6) NOT NULL
   ); 
-/*
-COURSES EXAMPLE
-____________________
-11111
-1234
-Mathematics
-Calculus for Dumbies
-3
-*/    
 
-CREATE TABLE SECTIONS 
+
+CREATE TABLE degrees_professors 
   ( 
-     sNum           INT(4) NOT NULL, 
-     sCourseNum     INT(5) NOT NULL, 
-     sProfSSN       INT(9) NOT NULL, 
-     sClassroom     VARCHAR(10) NOT NULL, 
-     sDays          CHAR(10) NOT NULL, 
-     sSeats         INT(3) NOT NULL, 
-     sBeginTime     VARCHAR(10) NOT NULL, 
-     sEndTime       VARCHAR(10) NOT NULL, 
-     PRIMARY KEY(sNum, sCourseNum), 
-     FOREIGN KEY(sCourseNum) REFERENCES COURSES(cNum), 
-     FOREIGN KEY(sProfSSN) REFERENCES PROFESSORS(pSSN) 
+     degreeName      VARCHAR(50) NOT NULL, 
+     degreeProfSSN   INT(9),
+      FOREIGN KEY(degreeProfSSN) REFERENCES professors(pSSN) 
+      ON DELETE CASCADE ON UPDATE NO ACTION,
+      UNIQUE (degreeName, degreeProfSSN)
+     
   ); 
-/*
-SECTIONS EXAMPLE
-____________________
-0001
-12345
-123456789
-MH420
-MWF
-13
-4:30
-5:30
-*/    
 
-
-
-CREATE TABLE DEGREES 
-  ( 
-     degreeName           VARCHAR(50) NOT NULL, 
-     degreeProfSSN INT(9) NOT NULL, 
-     PRIMARY KEY(degreeName, degreeProfSSN), 
-     FOREIGN KEY(degreeProfSSN) REFERENCES PROFESSORS(pSSN) 
-  ); 
-/*
-DEGREES EXAMPLE
-____________________
-Mathematics
-123456789
-*/
-
-
-
-CREATE TABLE RECORDS
-  ( 
-     rCWID           INT(8) NOT NULL, 
-     rGrade          VARCHAR(10) NOT NULL, 
-     rSecNum         INT(4) NOT NULL, 
-     rCourseNum      INT(5) NOT NULL, 
-     PRIMARY KEY(rSecNum, rCWID, rCourseNum), 
-     FOREIGN KEY(rSecNum) REFERENCES SECTIONS(sNum), 
-     FOREIGN KEY(rCWID) REFERENCES STUDENTS(sCWID), 
-     FOREIGN KEY(rCourseNum) REFERENCES COURSES(cNum) 
-  ); 
-/*
-RECORDS EXAMPLE
-____________________
-88888888
-A+
-1234
-12345
-*/      
-
-
-
-CREATE TABLE PREREQUISITES 
+CREATE TABLE prereq_courses 
   (   
-     prereqCourseNum INT(5) NOT NULL, 
-     prereqOfCourseNum INT(5) NOT NULL,
-     PRIMARY KEY(prereqCourseNum), 
-     FOREIGN KEY(prereqCourseNum) REFERENCES COURSES(cNum) 
+     prqNum          INT(5),
+      FOREIGN KEY (prqNum) REFERENCES courses(cNum)
+      ON DELETE CASCADE ON UPDATE NO ACTION,
+     prqOfNum        INT(5), 
+      FOREIGN KEY (prqOfNum) REFERENCES courses(cNum)
+      ON DELETE CASCADE ON UPDATE NO ACTION,
+      UNIQUE (prqNum, prqOfNum)
+      
   ); 
-/*
-PREREQUISITES EXAMPLE
-____________________
-12345
-*/    
 
-
-
-CREATE TABLE MINORS 
+/* CONSIDER: include check that major != minor (make two tables into one)
+? Or provide a check during user input process... */
+CREATE TABLE minors_in 
   ( 
-     mDepNum INT(3) NOT NULL, 
-     mStudentCWID      INT(8) NOT NULL, 
-     PRIMARY KEY(mDepNum, mStudentCWID), 
-     FOREIGN KEY(mStudentCWID) REFERENCES STUDENTS(sCWID), 
-     FOREIGN KEY(mDepNum) REFERENCES DEPARTMENTS(dNum) 
-  );    
+     minDepNum        INT(3) NOT NULL,
+      FOREIGN KEY(minDepNum) REFERENCES departments(dNum) 
+      ON DELETE CASCADE ON UPDATE NO ACTION,
+     minCWID          INT(8) NOT NULL, 
+      FOREIGN KEY(minCWID) REFERENCES students(sCWID)
+      ON DELETE CASCADE ON UPDATE NO ACTION,
+      UNIQUE (minDepNum, minCWID)
+     
+  ); 
 
+CREATE TABLE majors_in
+  ( 
+     majDepNum        INT(3) NOT NULL,
+      FOREIGN KEY(majDepNum) REFERENCES departments(dNum) 
+      ON DELETE CASCADE ON UPDATE NO ACTION,
+     majCWID          INT(8) NOT NULL, 
+      FOREIGN KEY(majCWID) REFERENCES students(sCWID)
+      ON DELETE CASCADE ON UPDATE NO ACTION,
+     UNIQUE (majDepNum, majCWID)
+     
+  );   
+
+CREATE TABLE sections 
+  ( 
+     sNum             INT(4) PRIMARY KEY, 
+     sCourseNum       INT(5),
+      FOREIGN KEY(sCourseNum) REFERENCES courses(cNum)
+      ON DELETE CASCADE ON UPDATE NO ACTION,
+     sProfSSN         INT(9), 
+      FOREIGN KEY(sProfSSN) REFERENCES professors(pSSN) 
+      ON DELETE CASCADE ON UPDATE NO ACTION,
+     sClassroom       VARCHAR(10) NOT NULL, 
+     sSeats           INT(3) NOT NULL, 
+     sBeginTime       TIME NOT NULL, 
+     sEndTime         TIME NOT NULL  
+     
+  ); 
+
+CREATE TABLE meeting_days 
+  (
+    mSectionNum       INT(4),
+      FOREIGN KEY(mSectionNum) REFERENCES sections(sNum)
+      ON DELETE CASCADE ON UPDATE NO ACTION,
+    mDays             ENUM('Mon','Tues','Wed','Thurs','Fri','Sat'),
+    UNIQUE (mSectionNum, mDays)
+  );
+
+CREATE TABLE records
+  ( 
+     rCWID           INT(8), 
+       FOREIGN KEY(rCWID) REFERENCES students(sCWID)
+       ON DELETE CASCADE ON UPDATE NO ACTION,
+     rSecNum         INT(4) PRIMARY KEY,
+       FOREIGN KEY(rSecNum) REFERENCES sections(sNum)
+       ON DELETE CASCADE ON UPDATE NO ACTION, 
+     rGrade          ENUM('A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 
+                          'C', 'C-', 'D+', 'D', 'D-', 'F') 
+  ); 
