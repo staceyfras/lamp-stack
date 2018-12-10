@@ -20,7 +20,8 @@ drop table if exists implementation?
 
 delete table .sql?
 
-#4 - #6 on project requirements
+COMPLETE: #4 - #6 on project requirements
+https://docs.google.com/document/d/1bDSYHmkxgwYZHG5TzZ-9n1Al_Nv0awZV2ps4rnKf-gY/edit?usp=sharing
 
 
 
