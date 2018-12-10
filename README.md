@@ -31,5 +31,9 @@ git push origin <newbranchname>
   
 then go on github.com and make a pull request for that branch.... i think this should work?
 
+https://jasonrudolph.com/blog/2009/02/25/git-tip-how-to-merge-specific-files-from-another-branch/
+
+^ more info
+
 
 
