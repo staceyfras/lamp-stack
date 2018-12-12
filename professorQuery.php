@@ -1,19 +1,19 @@
 <html>
-  <head>
+
+<head>
     <title>Professor Portal -- Results</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
-  </head>
-  <body>
+</head>
+
+<body>
     <p>
-      <a href="index.html" style="color:white">
+        <a href="index.html" style="color:white">
         RETURN HOME
-      </a>
-      |
-      <a href="professorPortal.html" style="color:white">
+      </a> |
+        <a href="professorPortal.html" style="color:white">
         BACK TO PORTAL
-      </a>
-      |
-      <a href="info.html" style="color:white">
+      </a> |
+        <a href="info.html" style="color:white">
         INFO
       </a>
     </p>
@@ -21,7 +21,7 @@
     <?php
     // Create connection for csuf server
     //param@ conn(server, user, password, database_name)
-    $conn = new mysqli("ecsmysql", "cs332a18", "kexoocei", "cs332a18");
+    $conn = new mysqli("ecsmysql", "cs332a20", "hievoosi", "cs332a20");
     //$conn = new mysqli("localhost", "root", "", "cs332a19");
     //Check connection. Quit if failed.
     if ($conn->connect_error) {
@@ -82,14 +82,15 @@
       return ($htmltable);
     } //END FUNCTION
     ?>
-    <h3>Results</h3>
-    <div style="text-align:left" class='table'>
-      <?php
+        <h3>Results</h3>
+        <div style="text-align:left" class='table'>
+            <?php
       $sqlresult = get_query($conn);
       if ($sqlresult != null) { echo sql_to_html_table($sqlresult, $delim = "\n"); }
       else { echo "Failed to print" . "\n"; }
       $conn->close();
       ?>
-    </div>
-  </body>
+        </div>
+</body>
+
 </html>

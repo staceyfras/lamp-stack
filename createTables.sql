@@ -12,7 +12,7 @@ COURSES     = 5 digits
 SECTIONS    = 4 digits
 DEPARTMENTS = 3 digits
 */ 
-USE cs332a19;
+USE cs332a20;
 
 /*
 Currently does not drop all tables due to foreign key restraints
@@ -150,9 +150,10 @@ CREATE TABLE records
      rCWID           INT(8), 
        FOREIGN KEY(rCWID) REFERENCES students(sCWID)
        ON DELETE CASCADE ON UPDATE NO ACTION,
-     rSecNum         INT(4) PRIMARY KEY,
+     rSecNum         INT(4),
        FOREIGN KEY(rSecNum) REFERENCES sections(sNum)
        ON DELETE CASCADE ON UPDATE NO ACTION, 
      rGrade          ENUM('A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 
-                          'C', 'C-', 'D+', 'D', 'D-', 'F') 
+                          'C', 'C-', 'D+', 'D', 'D-', 'F'),
+     UNIQUE (rCWID, rSecNum)
   ); 

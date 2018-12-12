@@ -1,27 +1,27 @@
 <html>
-    <head>
-        <title>Student Portal -- Results</title>
-        <link rel="stylesheet" type="text/css" href="styles.css">
-    </head>
-    <body>
-        <p>
-            <a href="index.html" style="color:white">
+
+<head>
+    <title>Student Portal -- Results</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <p>
+        <a href="index.html" style="color:white">
                 RETURN HOME
-            </a>
-            |
-            <a href="studentPortal.html" style="color:white">
+            </a> |
+        <a href="studentPortal.html" style="color:white">
                 BACK TO PORTAL
-            </a>
-            |
-            <a href="info.html" style="color:white">
+            </a> |
+        <a href="info.html" style="color:white">
                 INFO
             </a>
-        </p>
-        <br>
-        <?php
+    </p>
+    <br>
+    <?php
         // Create connection for csuf server
         // param @ conn(server, user, password, database_name)
-        $conn = new mysqli("ecsmysql", "cs332a18", "kexoocei", "cs332a18");
+        $conn = new mysqli("ecsmysql", "cs332a20", "hievoosi", "cs332a20");
         //$conn = new mysqli("localhost", "root", "", "cs332a19");
         //Check connection. Quit if failed.
         if ($conn->connect_errno) {
@@ -90,5 +90,6 @@
             mysqli_close($conn);
             ?>
         </div>
-    </body>
+</body>
+
 </html>
