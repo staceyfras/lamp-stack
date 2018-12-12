@@ -12,7 +12,7 @@ COURSES     = 5 digits
 SECTIONS    = 4 digits
 DEPARTMENTS = 3 digits
 */ 
-USE cs332a19;
+USE cs332a20;
 
 /*
 Currently does not drop all tables due to foreign key restraints
