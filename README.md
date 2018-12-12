@@ -3,7 +3,7 @@
 A web-based application which allows for students + professors to access and view relevant data according to project requirements. A LAMP stack implementation
 
 Database(official project):
-ssh cs332a18@shell.ecs.fullerton.edu
+ssh cs332a20@shell.ecs.fullerton.edu
 mysql -h mariadb -u cs332a20 -p
 password: hievoosi
 
