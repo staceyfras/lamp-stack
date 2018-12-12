@@ -88,13 +88,13 @@ VALUES 		(1234, 'Mon'), (1234, 'Wed'), (1234, 'Fri');
 INSERT INTO meeting_days(mSectionNum, mDays)
 VALUES 		(4321, 'Mon'), (4321, 'Wed'), (4321, 'Fri');
 INSERT INTO meeting_days(mSectionNum, mDays)
-VALUES 		(1111, 'Mon'), (1111, 'Wed'), (1111, 'Fri');
+VALUES 		(4320, 'Mon'), (4320, 'Wed'), (4320, 'Fri');
 INSERT INTO meeting_days(mSectionNum, mDays)
-VALUES 		(2222, 'TU'), (2222, 'TH'), (2222, 'SAT');
+VALUES 		(1233, 'Tues'), (1233, 'Thurs'), (1233, 'Sat');
 INSERT INTO meeting_days(mSectionNum, mDays)
-VALUES 		(3333, 'TU'), (3333, 'TH'), (3333, 'SAT');
+VALUES 		(6665, 'Tues'), (6665, 'Thurs'), (6665, 'Sat');
 INSERT INTO meeting_days(mSectionNum, mDays)
-VALUES 		(4444, 'Mon');
+VALUES 		(6666, 'Mon');
 
 
 
@@ -125,9 +125,9 @@ VALUES      (11748577, 1234, 'A-');
 INSERT INTO records(rCWID, rSecNum, rGrade)
 VALUES      (11748582, 1234, 'F');
 INSERT INTO records(rCWID, rSecNum, rGrade)
-VALUES      (24811110, 1234, 'C+');
+VALUES      (12345678, 1234, 'C+');
 INSERT INTO records(rCWID, rSecNum, rGrade)
-VALUES      (74147050, 1234, 'A-');
+VALUES      (11748579, 1234, 'A-');
 INSERT INTO records(rCWID, rSecNum, rGrade)
 VALUES      (11748582, 4321, 'B+');
 INSERT INTO records(rCWID, rSecNum, rGrade)

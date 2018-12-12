@@ -150,9 +150,10 @@ CREATE TABLE records
      rCWID           INT(8), 
        FOREIGN KEY(rCWID) REFERENCES students(sCWID)
        ON DELETE CASCADE ON UPDATE NO ACTION,
-     rSecNum         INT(4) PRIMARY KEY,
+     rSecNum         INT(4),
        FOREIGN KEY(rSecNum) REFERENCES sections(sNum)
        ON DELETE CASCADE ON UPDATE NO ACTION, 
      rGrade          ENUM('A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 
-                          'C', 'C-', 'D+', 'D', 'D-', 'F') 
+                          'C', 'C-', 'D+', 'D', 'D-', 'F'),
+     UNIQUE (rCWID, rSecNum)
   ); 
