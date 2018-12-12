@@ -4,7 +4,7 @@ A web-based application which allows for students + professors to access and vie
 
 Database(official project):
 ssh cs332a18@shell.ecs.fullerton.edu
-mysql -h mariadb -u cs332a18 -p
+mysql -h mariadb -u cs332a20 -p
 password: hievoosi
 
 ## How To
