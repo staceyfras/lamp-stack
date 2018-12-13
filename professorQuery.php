@@ -44,7 +44,7 @@
         $course = $_POST["cnumGrade"];
         $section = $_POST["snumGrade"];
       //placeholder function
-        $stringOfQuery = "SELECT cTitle, sNum, rGrade, COUNT(rGrade) FROM sections INNER JOIN courses on sCourseNum=Cnum INNER JOIN records on sNum = rSecNum WHERE cNum=${course} AND sNum=${section};";
+        $stringOfQuery = "SELECT cTitle, sNum, rGrade, COUNT(rGrade) FROM sections INNER JOIN courses on sCourseNum=Cnum INNER JOIN records on sNum = rSecNum WHERE cNum=${course} AND sNum=${section} group by rGrade;";
         $sqlresult = $conn->query($stringOfQuery);
         if($sqlresult->num_rows <= 0) {
           printf("Error: %s\n", $conn->error);

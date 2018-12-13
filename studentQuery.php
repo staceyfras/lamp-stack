@@ -43,7 +43,7 @@
             if (isset($_POST["courseQuery"])) {
             //placeholder function
                 $course = $_POST["courseQuery"];
-                $stringOfQuery = "SELECT * from sections INNER JOIN courses WHERE cNum =${course};";
+                $stringOfQuery = "SELECT * from sections WHERE sCourseNum =${course};"; 
                 $sqlresult = $conn->query($stringOfQuery);
                 if($sqlresult->num_rows <= 0) {
                   printf("Error: %s\n", $conn->error);
