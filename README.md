@@ -23,18 +23,4 @@ delete table .sql?
 COMPLETE: #4 - #6 on project requirements
 https://docs.google.com/document/d/1bDSYHmkxgwYZHG5TzZ-9n1Al_Nv0awZV2ps4rnKf-gY/edit?usp=sharing
 
-### John
-JOHN: How to commit your insertData.sql file:
-git checkout <newbranchname> insertData.sql
-  
-git commit -am "replacing inserData.sql"
-git push origin <newbranchname>
-  
-then go on github.com and make a pull request for that branch.... i think this should work?
-
-https://jasonrudolph.com/blog/2009/02/25/git-tip-how-to-merge-specific-files-from-another-branch/
-
-^ more info
-
-
 
