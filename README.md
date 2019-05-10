@@ -4,8 +4,8 @@ A web-based application which allows for students + professors to access and vie
 
 Database(official project):
 ssh cs332a20@shell.ecs.fullerton.edu
-mysql -h mariadb -u cs332a20 -p
-password: hievoosi
+mysql -h mariadb -u csxxxxx -p
+password: xxxxxxx
 
 ## How To
 "use cs332aXX". Use "source createTables.sql; source insertData.sql;" in mariadb console to create db and fill with data.
