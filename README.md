@@ -1,4 +1,5 @@
 # lamp-uni
+*NOTICE: This project no longer works due to denied access to the server + database*
 
 A web-based application which allows for students + professors to access and view relevant data according to project requirements. A LAMP stack implementation
 
